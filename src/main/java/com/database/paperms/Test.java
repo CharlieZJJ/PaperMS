@@ -14,6 +14,6 @@ public class Test {
     @RequestMapping("/hello")
     @ResponseBody
     public String test(){
-        return "hello";
+        return "hello???";
     }
 }
