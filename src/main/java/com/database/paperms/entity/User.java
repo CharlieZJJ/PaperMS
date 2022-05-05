@@ -1,7 +1,7 @@
 package com.database.paperms.entity;
 
 
-import com.database.paperms.entity.type.Permission;
+import com.database.paperms.entity.type.Impl.Permission;
 
 import java.io.Serializable;
 

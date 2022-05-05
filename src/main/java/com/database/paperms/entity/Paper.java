@@ -1,6 +1,6 @@
 package com.database.paperms.entity;
 
-import com.database.paperms.entity.type.PaperType;
+import com.database.paperms.entity.type.Impl.PaperType;
 
 import java.io.Serializable;
 import java.util.Date;
