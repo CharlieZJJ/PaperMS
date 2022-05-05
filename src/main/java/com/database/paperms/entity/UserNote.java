@@ -1,8 +1,9 @@
 package com.database.paperms.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserNote {
+public class UserNote implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
