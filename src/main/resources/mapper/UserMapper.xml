@@ -5,16 +5,12 @@
 
 <mapper namespace="com.database.paperms.mapper.UserMapper">
 
-    <resultMap id="UserResultMap" type="com.database.paperms.entity.User" >
-        <id column="user_id" property="userId" />
-        <result column="user_account" property="userAccount"/>
-        <result column="user_name" property="userName"/>
-        <result column="user_password" property="userPassword"/>
-        <result column="user_permission" property="userPermission"/>
-    </resultMap>
-
-    <select id="getById" resultMap="UserResultMap">
+    <select id="getById" resultType="com.database.paperms.entity.User">
         select * from user where user_id = #{id}
     </select>
+
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="userId">
+        insert into user(user_name,user_account,user_password) values(#{userName}, #{userAccount}, #{userPassword})
+    </insert>
 
 </mapper>

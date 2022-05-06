@@ -9,4 +9,7 @@ import com.database.paperms.entity.User;
  */
 public interface UserService {
     User getUserById(int id);
+
+    int save(User user);
+
 }

@@ -29,12 +29,12 @@ public enum PaperType implements IEnum {
 
 
     @Override
-    public Integer getCode() {
+    public final Integer getCode() {
         return code;
     }
 
     @Override
-    public String getValue() {
+    public final String getValue() {
         return value;
     }
 }

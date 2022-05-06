@@ -1,12 +1,17 @@
 package com.database.paperms.controller;
 
+import cn.hutool.core.util.RandomUtil;
 import com.database.paperms.entity.User;
+import com.database.paperms.response.ResultData;
+import com.database.paperms.response.ReturnCode;
 import com.database.paperms.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import com.database.paperms.utils.MailUtil;
+import com.database.paperms.utils.RedisUtil;
+import com.database.paperms.utils.RegexUtil;
+import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * ClassName: com.database.paperms.controller.UserController
@@ -14,15 +19,69 @@ import org.springframework.web.bind.annotation.RestController;
  * Date: 2022-05-05 15:24
  */
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
-    @Autowired
+    @Resource
     private UserService userService;
+    @Resource
+    private RedisUtil redisUtil;
+    @Resource
+    private MailUtil mailUtil;
+    @Resource
+    private Pbkdf2PasswordEncoder passwordEncoder;
 
-    @GetMapping("/get/{id}")
-    public User getUserById(@PathVariable int id){
-        User user = userService.getUserById(id);
-        return user;
+    private static final int EXPIRE_TIME = 300;
+    private static final int CODE_LENGTH = 6;
+
+    /**
+     * 注册模块：
+     *                                                                      --超时-> 验证码失效，redis内保存的信息消失
+     *                                                                     |
+     * 填写名字、邮箱（账号）、密码、重复密码 --> 发送验证码（前端传递给后端User信息） --
+     *                                                                     |
+     *                                                                     --未超时-> 允许多次验证，将验证码传递给后端，若成功，那么信息会录入数据库，失败则否
+     */
+    @GetMapping("/register")
+    public ResultData register(@RequestBody User user){
+        String code = RandomUtil.randomString(CODE_LENGTH);
+        user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
+        while(!redisUtil.setNx(code,user,EXPIRE_TIME)){
+            code = RandomUtil.randomString(CODE_LENGTH);
+        }
+        String mail = user.getUserAccount();
+        if(RegexUtil.checkEmail(mail)) {
+            mailUtil.sendSimpleMail(user.getUserAccount(), code);
+            return ResultData.success();
+        }
+        else{
+            return ResultData.fail(ReturnCode.INVALID_EMAIL);
+        }
     }
+
+    @PutMapping("/verify/{code}")
+    public ResultData verify(@PathVariable String code){
+        User user = null;
+        ResultData resultData = null;
+        try {
+            user = (User) redisUtil.get(code);
+            if(user == null){
+                resultData =  ResultData.fail(ReturnCode.CLIENT_AUTHENTICATION_FAILED);
+            }
+            else{
+                userService.save(user);
+                resultData =  ResultData.success(ReturnCode.RC100);
+            }
+        }catch(ClassCastException e){
+            e.printStackTrace();
+            resultData = ResultData.fail(ReturnCode.CLASS_CAST_ERROR);
+        }
+        finally {
+            redisUtil.del(code);
+        }
+        return resultData;
+    }
+
+
 
 }
