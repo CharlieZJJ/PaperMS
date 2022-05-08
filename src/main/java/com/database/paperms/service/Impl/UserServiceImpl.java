@@ -4,7 +4,10 @@ import com.database.paperms.entity.User;
 import com.database.paperms.mapper.UserMapper;
 import com.database.paperms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * ClassName: com.database.paperms.service.Impl.UserServiceImpl
@@ -17,6 +20,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+    @Resource
+    private Pbkdf2PasswordEncoder passwordEncoder;
+
     @Override
     public User getUserById(int id) {
         return userMapper.getById(id);
@@ -24,6 +30,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int save(User user) {
+        user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
         return userMapper.insertUser(user);
     }
 
@@ -33,4 +40,8 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    @Override
+    public boolean accountExist(String account) {
+        return userMapper.testAccount(account) == 1;
+    }
 }

@@ -53,7 +53,8 @@ public enum ReturnCode {
     USERNAME_OR_PASSWORD_ERROR(1002, "用户名或密码错误"),
     UNSUPPORTED_GRANT_TYPE(1003, "不支持的认证模式"),
     INVALID_EMAIL(1004,"不合法的邮箱"),
-    CLASS_CAST_ERROR(1005,"出错了！");
+    CLASS_CAST_ERROR(1005,"出错了！"),
+    USED_EMAIL(1006,"邮箱已被注册！");
     /**
      * 自定义状态码
      **/

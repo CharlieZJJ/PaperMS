@@ -14,4 +14,6 @@ public interface UserService {
 
     User login(String userAccount);
 
+    boolean accountExist(String account);
+
 }

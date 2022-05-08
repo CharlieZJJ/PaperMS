@@ -17,4 +17,8 @@
         select * from user where user_account = #{account}
     </select>
 
+    <select id="testAccount" resultType="int">
+        select 1 from user where user_account = #{userAccount} limit 1
+    </select>
+
 </mapper>

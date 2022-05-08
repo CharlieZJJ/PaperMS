@@ -12,7 +12,6 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.xml.transform.Result;
 
 /**
  * ClassName: com.database.paperms.controller.UserController
@@ -43,10 +42,12 @@ public class UserController {
      *                                                                     |
      *                                                                     --未超时-> 允许多次验证，将验证码传递给后端，若成功，那么信息会录入数据库，失败则否
      */
-    @GetMapping("/register")
+    @PostMapping("/register")
     public ResultData register(@RequestBody User user){
+        if(userService.accountExist(user.getUserAccount())){
+            return ResultData.fail(ReturnCode.USED_EMAIL);
+        }
         String code = RandomUtil.randomString(CODE_LENGTH);
-        user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
         while(!redisUtil.setNx(code,user,EXPIRE_TIME)){
             code = RandomUtil.randomString(CODE_LENGTH);
         }
@@ -83,7 +84,7 @@ public class UserController {
         return resultData;
     }
 
-    @GetMapping ("/login")
+    @PostMapping ("/login")
     public ResultData login(@RequestParam String account, @RequestParam String password){
         User user = userService.login(account);
         if(user != null){
