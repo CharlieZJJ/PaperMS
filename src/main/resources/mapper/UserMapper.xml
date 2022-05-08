@@ -13,4 +13,8 @@
         insert into user(user_name,user_account,user_password) values(#{userName}, #{userAccount}, #{userPassword})
     </insert>
 
+    <select id="getByAccount" resultType="com.database.paperms.entity.User">
+        select * from user where user_account = #{account}
+    </select>
+
 </mapper>

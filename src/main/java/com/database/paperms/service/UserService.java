@@ -12,4 +12,6 @@ public interface UserService {
 
     int save(User user);
 
+    User login(String userAccount);
+
 }

@@ -26,4 +26,11 @@ public class UserServiceImpl implements UserService {
     public int save(User user) {
         return userMapper.insertUser(user);
     }
+
+    @Override
+    public User login(String account) {
+        User user = userMapper.getByAccount(account);
+        return user;
+    }
+
 }

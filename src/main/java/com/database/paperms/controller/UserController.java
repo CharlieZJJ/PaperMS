@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.xml.transform.Result;
 
 /**
  * ClassName: com.database.paperms.controller.UserController
@@ -82,6 +83,18 @@ public class UserController {
         return resultData;
     }
 
-
+    @GetMapping ("/login")
+    public ResultData login(@RequestParam String account, @RequestParam String password){
+        User user = userService.login(account);
+        if(user != null){
+            if(passwordEncoder.matches(password,user.getUserPassword())){
+                return ResultData.success(user);
+            }else {
+                return ResultData.fail(ReturnCode.USERNAME_OR_PASSWORD_ERROR);
+            }
+        }else{
+            return ResultData.fail(ReturnCode.USERNAME_OR_PASSWORD_ERROR);
+        }
+    }
 
 }
