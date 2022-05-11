@@ -18,5 +18,5 @@ public interface UserMapper {
 
     User getByAccount(String account);
 
-    int testAccount(String userAccount);
+    Integer testAccount(String userAccount);
 }

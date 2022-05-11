@@ -42,6 +42,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean accountExist(String account) {
-        return userMapper.testAccount(account) == 1;
+        return userMapper.testAccount(account) != null;
     }
 }
