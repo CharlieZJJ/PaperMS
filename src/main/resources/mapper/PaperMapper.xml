@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.database.paperms.mapper.PaperMapper">
+
+    <insert id="insertPaper" useGeneratedKeys="true" keyProperty="paperId">
+        insert into paper(paper_id,paper_title,paper_meeting,paper_date,paper_summary,paper_link,paper_type,paper_publisher_id,paper_publish_time)
+        values(#{paperId},#{paperTitle},#{paperMeeting},#{paperDate},#{paperSummary},#{paperLink},#{paperType},#{paperPublisherId},#{paperPublishTime})
+    </insert>
+
+
+
+</mapper>
