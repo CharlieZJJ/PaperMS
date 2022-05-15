@@ -1,10 +1,13 @@
 package com.database.paperms.service.Impl;
 
 import com.database.paperms.entity.Comment;
+import com.database.paperms.entity.Reply;
 import com.database.paperms.mapper.CommentMapper;
 import com.database.paperms.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -27,5 +30,8 @@ public class CommentServiceImpl implements CommentService {
     public Comment getComment(Integer commentId){
         return commentMapper.getComment(commentId);
     }
+
+    @Override
+    public List<Comment> getByPaperId(Integer paperId){ return commentMapper.getByPaperId(paperId); }
 
 }

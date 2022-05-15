@@ -22,5 +22,10 @@
         where reply_id = #{replyId}
     </select>
 
+    <select id="getByCommentId" resultType="com.database.paperms.entity.Reply">
+        select *
+        from reply
+        where comment_id = #{commentId}
+    </select>
 
 </mapper>
