@@ -15,4 +15,19 @@ public class PaperServicelmpl implements PaperService {
     public int savePaper(Paper paper){
         return paperMapper.insertPaper(paper);
     }
+
+    @Override
+    public Paper getPaper(Integer paperId){
+        return paperMapper.getPaper(paperId);
+    }
+
+    @Override
+    public int deletePaper(Integer paperId){
+        return paperMapper.deletePaper(paperId);
+    }
+
+    @Override
+    public int updatePaper(Paper paper){
+        return paperMapper.updatePaper(paper);
+    }
 }

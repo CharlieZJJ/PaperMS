@@ -10,6 +10,18 @@
         values(#{paperId},#{paperTitle},#{paperMeeting},#{paperDate},#{paperSummary},#{paperLink},#{paperType},#{paperPublisherId},#{paperPublishTime})
     </insert>
 
+    <select id="getPaper" resultType="com.database.paperms.entity.Paper">
+        select * from paper where paper_id = #{paperId}
+    </select>
 
+    <delete id="deletePaper">
+        delete from paper where paper_id = #{paperId}
+    </delete>
+
+    <update id="updatePaper">
+        update paper set paperTitle=#{paperTitle},paperMeeting=#{paperMeeting},paperDate=#{paperDate},
+                         paperSummary=#{paperSummary},paperLink=#{paperLink},paperType=#{paperType},paperPublisherId=#{paperPublisherId},
+                         paperPublishTime=#{paperPublishTime} where paper_id = #{paperId}
+    </update>
 
 </mapper>

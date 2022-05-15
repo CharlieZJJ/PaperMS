@@ -7,10 +7,7 @@ import com.database.paperms.response.ResultData;
 import com.database.paperms.response.ReturnCode;
 import com.database.paperms.service.PaperService;
 import com.database.paperms.utils.RegexUtil;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -32,8 +29,27 @@ public class PaperController {
         return ResultData.fail(ReturnCode.CLASS_CAST_ERROR);
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResultData delete(@PathVariable("id") Integer paperId){
+        try {
+            paperService.deletePaper(paperId);
+            return ResultData.success();
+        }catch(ClassCastException e){
+            e.printStackTrace();
+        }
+        return ResultData.fail(ReturnCode.CLASS_CAST_ERROR);
+    }
 
-
+    @PostMapping("/update")
+    public ResultData update(@RequestBody Paper paper){
+        try {
+            paperService.updatePaper(paper);
+            return ResultData.success();
+        }catch(ClassCastException e){
+            e.printStackTrace();
+        }
+        return ResultData.fail(ReturnCode.CLASS_CAST_ERROR);
+    }
 
 
 

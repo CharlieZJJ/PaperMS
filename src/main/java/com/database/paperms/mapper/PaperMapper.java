@@ -9,4 +9,10 @@ public interface PaperMapper {
 
     int insertPaper(Paper paper);
 
+    Paper getPaper(Integer paperId);
+
+    int deletePaper(Integer paperId);
+
+    int updatePaper(Paper paper);
+
 }
