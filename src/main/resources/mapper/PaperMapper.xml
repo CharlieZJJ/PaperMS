@@ -6,22 +6,35 @@
 <mapper namespace="com.database.paperms.mapper.PaperMapper">
 
     <insert id="insertPaper" useGeneratedKeys="true" keyProperty="paperId">
-        insert into paper(paper_id,paper_title,paper_meeting,paper_date,paper_summary,paper_link,paper_type,paper_publisher_id,paper_publish_time)
-        values(#{paperId},#{paperTitle},#{paperMeeting},#{paperDate},#{paperSummary},#{paperLink},#{paperType},#{paperPublisherId},#{paperPublishTime})
+        insert into paper(paper_id, paper_title, paper_meeting, paper_date, paper_summary, paper_link, paper_type,
+                          paper_publisher_id, paper_publish_time)
+        values (#{paperId}, #{paperTitle}, #{paperMeeting}, #{paperDate}, #{paperSummary}, #{paperLink}, #{paperType},
+                #{paperPublisherId}, #{paperPublishTime})
     </insert>
 
     <select id="getPaper" resultType="com.database.paperms.entity.Paper">
-        select * from paper where paper_id = #{paperId}
+        select *
+        from paper
+        where paper_id = #{paperId}
     </select>
 
     <delete id="deletePaper">
-        delete from paper where paper_id = #{paperId}
+        delete
+        from paper
+        where paper_id = #{paperId}
     </delete>
 
-    <update id="updatePaper">
-        update paper set paperTitle=#{paperTitle},paperMeeting=#{paperMeeting},paperDate=#{paperDate},
-                         paperSummary=#{paperSummary},paperLink=#{paperLink},paperType=#{paperType},paperPublisherId=#{paperPublisherId},
-                         paperPublishTime=#{paperPublishTime} where paper_id = #{paperId}
+    <update id="updatePaper" parameterType="com.database.paperms.entity.Paper">
+        update paper
+        set paper_title=#{paperTitle},
+            paper_meeting=#{paperMeeting},
+            paper_date=#{paperDate},
+            paper_summary=#{paperSummary},
+            paper_link=#{paperLink},
+            paper_type=#{paperType},
+            paper_publisher_id=#{paperPublisherId},
+            paper_publish_time=#{paperPublishTime}
+        where paper_id = #{paperId}
     </update>
 
 </mapper>
