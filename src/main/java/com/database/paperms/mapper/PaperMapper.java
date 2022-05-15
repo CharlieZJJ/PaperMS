@@ -11,6 +11,8 @@ public interface PaperMapper {
 
     Paper getPaper(Integer paperId);
 
+    Paper getByLink(String paperLink);
+
     int deletePaper(Integer paperId);
 
     int updatePaper(Paper paper);

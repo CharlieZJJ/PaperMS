@@ -55,9 +55,10 @@ public enum ReturnCode {
     INVALID_EMAIL(1004,"不合法的邮箱"),
     CLASS_CAST_ERROR(1005,"出错了！"),
     USED_EMAIL(1006,"邮箱已被注册！"),
-
     NOT_EXISTENT_PAPER_ID(1007,"此论文的ID不存在！"),
-    USED_PAPER_ID(1008,"此论文ID号已经被使用！");
+    USED_PAPER_ID(1008,"此论文ID号已经被使用！"),
+    NOT_EXISTENT_COMMENT(1009,"此评论不存在！"),
+    USED_PAPER_LINK(1010,"该论文链接已经存在！");
     /**
      * 自定义状态码
      **/

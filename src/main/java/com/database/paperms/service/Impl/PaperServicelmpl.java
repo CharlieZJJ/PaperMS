@@ -22,6 +22,9 @@ public class PaperServicelmpl implements PaperService {
     }
 
     @Override
+    public Paper getByLink(String paperLink){ return paperMapper.getByLink(paperLink); }
+
+    @Override
     public int deletePaper(Integer paperId){
         return paperMapper.deletePaper(paperId);
     }

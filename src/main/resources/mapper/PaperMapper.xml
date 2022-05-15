@@ -6,9 +6,9 @@
 <mapper namespace="com.database.paperms.mapper.PaperMapper">
 
     <insert id="insertPaper" useGeneratedKeys="true" keyProperty="paperId">
-        insert into paper(paper_id, paper_title, paper_meeting, paper_date, paper_summary, paper_link, paper_type,
+        insert into paper(paper_title, paper_meeting, paper_date, paper_summary, paper_link, paper_type,
                           paper_publisher_id, paper_publish_time)
-        values (#{paperId}, #{paperTitle}, #{paperMeeting}, #{paperDate}, #{paperSummary}, #{paperLink}, #{paperType},
+        values (#{paperTitle}, #{paperMeeting}, #{paperDate}, #{paperSummary}, #{paperLink}, #{paperType},
                 #{paperPublisherId}, #{paperPublishTime})
     </insert>
 
@@ -16,6 +16,12 @@
         select *
         from paper
         where paper_id = #{paperId}
+    </select>
+
+    <select id="getByLink" resultType="com.database.paperms.entity.Paper">
+        select *
+        from paper
+        where paper_link = #{paperLink}
     </select>
 
     <delete id="deletePaper">

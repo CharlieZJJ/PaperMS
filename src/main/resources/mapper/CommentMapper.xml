@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.database.paperms.mapper.CommentMapper">
+
+    <insert id="insertComment" useGeneratedKeys="true" keyProperty="commentId">
+        insert into comment(paper_id, comment_user_id, comment_content, comment_date)
+        values(#{paperId},#{commentUserId},#{commentContent},#{commentDate})
+    </insert>
+
+    <delete id="deleteComment">
+        delete
+        from comment
+        where comment_id = #{commentId}
+    </delete>
+
+    <select id="getComment" resultType="com.database.paperms.entity.Comment">
+        select *
+        from comment
+        where comment_id = #{commentId}
+    </select>
+
+</mapper>
