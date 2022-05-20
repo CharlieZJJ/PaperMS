@@ -20,7 +20,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 /**
  * 通过AOP使得返回值自动包装为ResultData，无需指定
  */
-@RestControllerAdvice
+@RestControllerAdvice(basePackages = "com.database.paperms.controller")
 public class ResponseAdvice implements ResponseBodyAdvice<Object> {
 
     @Autowired
