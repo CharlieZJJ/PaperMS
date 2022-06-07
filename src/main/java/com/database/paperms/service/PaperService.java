@@ -13,5 +13,7 @@ public interface PaperService {
 
     int updatePaper(Paper paper);
 
+    int deletePaperRd(Integer paperId,Long paperRd);
+
 }
 
