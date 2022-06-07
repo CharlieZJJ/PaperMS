@@ -18,4 +18,6 @@ public interface CommentMapper {
 
     List<Comment> getByPaperId(Integer paper_id);
 
+    int removeComment(Integer commentId);
+
 }

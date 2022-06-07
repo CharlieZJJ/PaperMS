@@ -43,4 +43,14 @@ public class CommentController {
         }
     }
 
+    @PostMapping("/remove/{id}")
+    public ResultData remove(@PathVariable("id") Integer commentId){
+        if(commentService.getComment(commentId) != null){
+            commentService.removeComment(commentId);
+            return ResultData.success();
+        }else{
+            return ResultData.fail(ReturnCode.NOT_EXISTENT_COMMENT);
+        }
+    }
+
 }

@@ -15,4 +15,6 @@ public interface CommentService {
 
     List<Comment> getByPaperId(Integer paperId);
 
+    int removeComment(Integer commentId);
+
 }
