@@ -12,6 +12,9 @@ public interface ReplyService {
     int deleteReply(Integer replyId);
 
     Reply getReply(Integer replyId);
+
     List<Reply> getByCommentId(Integer commentId);
+
+    int removeReply(Integer replyId);
 
 }

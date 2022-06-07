@@ -16,4 +16,6 @@ public interface ReplyMapper {
 
     List<Reply> getByCommentId(Integer comment_id);
 
+    int removeReply(Integer replyId);
+
 }

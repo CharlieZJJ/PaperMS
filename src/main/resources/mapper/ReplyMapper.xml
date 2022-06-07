@@ -28,4 +28,10 @@
         where comment_id = #{commentId}
     </select>
 
+    <update id="removeReply" parameterType="com.database.paperms.entity.Reply">
+        update reply
+        set reply_content = "此回复已被删除。"
+        where reply_id = #{replyId}
+    </update>
+
 </mapper>

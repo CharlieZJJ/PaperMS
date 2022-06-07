@@ -31,4 +31,15 @@ public class ReplyController {
             return ResultData.fail(ReturnCode.NOT_EXISTENT_REPLY);
         }
     }
+
+    @PostMapping("/remove/{id}")
+    public ResultData remove(@PathVariable("id") Integer replyId){
+        if(replyService.getReply(replyId) != null){
+            replyService.removeReply(replyId);
+            return ResultData.success();
+        }else{
+            return ResultData.fail(ReturnCode.NOT_EXISTENT_REPLY);
+        }
+    }
+
 }
