@@ -60,3 +60,9 @@ mybatis:
     map-underscore-to-camel-case: true
     default-enum-type-handler: com.database.paperms.handler.AutoEnumTypeHandler
   type-aliases-package: com.database.paperms.entity
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql

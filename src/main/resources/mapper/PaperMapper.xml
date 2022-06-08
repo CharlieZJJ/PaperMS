@@ -43,4 +43,44 @@
         where paper_id = #{paperId}
     </update>
 
+    <select id="list" resultType="com.database.paperms.entity.Paper">
+        select * from paper
+        <choose>
+            <when test="type == 'title'">
+                where paper_title like concat('%',#{cond},'%')
+            </when>
+            <when test="type == 'direction'">
+                inner join paper_rd where rd_id = #{cond}
+            </when>
+            <when test="type == 'summary'">
+                where paper_summary like concat('%',#{cond},'%')
+            </when>
+        </choose>
+       <choose>
+           <when test="sort = 0">
+               order by paper_date
+           </when>
+           <when test="sort = 1">
+               order by paper_date desc
+           </when>
+       </choose>
+    </select>
+
+    <select id="getPaperAuthor" resultType="String">
+        select author_name from paper_author where paper_id = #{paperId}
+    </select>
+
+    <select id="getPaperCitation" resultType="Integer">
+        select citation_id from paper_citation where paper_id = #{paperId}
+    </select>
+
+    <select id="getPaperRd" resultType="String">
+        select rd_name from paper_rd inner join research_direction rd on paper_rd.rd_id = rd.rd_id where paper_id = #{paperId}
+    </select>
+
+    <select id="getPaperAdditionalFile" resultType="String">
+        select file_path from paper_additional_file where paper_id = #{paperId}
+    </select>
+
+
 </mapper>

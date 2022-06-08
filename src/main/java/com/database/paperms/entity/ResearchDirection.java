@@ -1,29 +1,28 @@
 package com.database.paperms.entity;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 
 public class ResearchDirection implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private BigInteger rdId;
+    private String rdId;
 
     private String rdName;
 
     public ResearchDirection(){
     }
 
-    public ResearchDirection(BigInteger rdId, String rdName) {
+    public ResearchDirection(String rdId, String rdName) {
         this.rdId = rdId;
         this.rdName = rdName;
     }
 
-    public BigInteger getRdId() {
+    public String getRdId() {
         return rdId;
     }
 
-    public void setRdId(BigInteger rdId) {
+    public void setRdId(String rdId) {
         this.rdId = rdId;
     }
 
