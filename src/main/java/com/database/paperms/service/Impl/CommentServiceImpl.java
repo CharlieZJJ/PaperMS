@@ -34,7 +34,4 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<Comment> getByPaperId(Integer paperId){ return commentMapper.getByPaperId(paperId); }
 
-    @Override
-    public  int removeComment(Integer commentId) {return commentMapper.removeComment(commentId); }
-
 }

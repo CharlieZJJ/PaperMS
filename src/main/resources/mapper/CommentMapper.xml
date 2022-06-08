@@ -28,10 +28,4 @@
         where paper_id = #{paperId}
     </select>
 
-    <update id="removeComment" parameterType="com.database.paperms.entity.Comment">
-        update comment
-        set comment_content = "此评论已被删除。"
-        where comment_id = #{commentId}
-    </update>
-
 </mapper>

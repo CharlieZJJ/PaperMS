@@ -32,7 +32,4 @@ public class ReplyServiceImpl implements ReplyService {
     @Override
     public List<Reply> getByCommentId(Integer commentId){ return replyMapper.getByCommentId(commentId); }
 
-    @Override
-    public int removeReply(Integer replyId) {return replyMapper.removeReply(replyId); }
-
 }

@@ -8,7 +8,6 @@ import com.database.paperms.service.UserService;
 import com.database.paperms.utils.MailUtil;
 import com.database.paperms.utils.RedisUtil;
 import com.database.paperms.utils.RegexUtil;
-import io.swagger.annotations.*;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -63,7 +62,7 @@ public class UserController {
         }
     }
 
-    @PutMapping("/verify/{code}") // verify/sdcvsa
+    @PutMapping("/verify/{code}")
     public ResultData verify(@PathVariable String code){
         User user = null;
         ResultData resultData = null;
@@ -86,7 +85,7 @@ public class UserController {
         return resultData;
     }
 
-    @PostMapping ("/login") // login?a=xxx&b=xx.....
+    @PostMapping ("/login")
     public ResultData login(@RequestParam String account, @RequestParam String password){
         User user = userService.login(account);
         if(user != null){

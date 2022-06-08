@@ -1,7 +1,6 @@
 package com.database.paperms.controller;
 
 import com.database.paperms.entity.Comment;
-import com.database.paperms.entity.Paper;
 import com.database.paperms.entity.Reply;
 import com.database.paperms.response.ResultData;
 import com.database.paperms.response.ReturnCode;
@@ -15,13 +14,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/comment")
 public class CommentController {
-
     @Resource
     private CommentService commentService;
-
     @Resource
     private ReplyService replyService;
-
     @PostMapping("/add")
     public ResultData add(@RequestBody Comment comment){
         commentService.saveComment(comment);
@@ -42,15 +38,4 @@ public class CommentController {
             return ResultData.fail(ReturnCode.NOT_EXISTENT_COMMENT);
         }
     }
-
-    @PostMapping("/remove/{id}")
-    public ResultData remove(@PathVariable("id") Integer commentId){
-        if(commentService.getComment(commentId) != null){
-            commentService.removeComment(commentId);
-            return ResultData.success();
-        }else{
-            return ResultData.fail(ReturnCode.NOT_EXISTENT_COMMENT);
-        }
-    }
-
 }
