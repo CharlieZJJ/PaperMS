@@ -20,7 +20,7 @@ public interface PaperService {
 
     PageHelper<PaperVO> list(String type, String cond, int sort, int pageSize, int pageNo);
 
-    PageHelper<PaperVO> advanced_list(AdvancedSearchValue value, int pageSize, int pageNo, int sort) throws SQLException;
+    PageHelper<PaperVO> advanced_list(AdvancedSearchValue value, int pageSize, int pageNo, int sort) throws Exception;
 
     PageHelper<PaperVO> getByAccount(String account, int pageSize, int pageNo, int sort);
 

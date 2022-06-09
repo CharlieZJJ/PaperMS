@@ -8,7 +8,6 @@ import com.database.paperms.entity.vo.AdvancedSearchValue;
 import org.apache.ibatis.annotations.Mapper;
 
 
-import java.sql.SQLException;
 import java.util.List;
 
 @Mapper
@@ -36,7 +35,7 @@ public interface PaperMapper {
 
     List<SmallPaper> getSmallPaper(List<Integer> paperCitationId);
 
-    List<Paper> advanced_list(AdvancedSearchValue value, int pageSize, int pageNo, int sort) throws SQLException;
+    List<Paper> advanced_list(AdvancedSearchValue value, int pageSize, int pageNo, int sort) throws Exception;
 
     List<Paper> getPaperByAccount(String account, int sort);
 

@@ -54,7 +54,7 @@ public class PaperServicelmpl implements PaperService {
     }
 
     @Override
-    public PageHelper<PaperVO> advanced_list(AdvancedSearchValue value, int pageSize, int pageNo, int sort) throws SQLException {
+    public PageHelper<PaperVO> advanced_list(AdvancedSearchValue value, int pageSize, int pageNo, int sort) throws Exception {
         List<Paper> papers = null;
         try {
             papers = paperMapper.advanced_list(value, pageSize, pageNo, sort);

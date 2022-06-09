@@ -112,7 +112,7 @@ public class PaperController {
         PageHelper<PaperVO> list = null;
         try {
             list = paperService.advanced_list(value, pageSize, pageNo, sort);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             return ResultData.fail(-1,"您的搜索条件有误，请检查！");
         }
         return ResultData.success(list);
