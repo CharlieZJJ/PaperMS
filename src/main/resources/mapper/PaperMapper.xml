@@ -97,7 +97,121 @@
         </where>
     </select>
     <select id="advanced_list" resultType="com.database.paperms.entity.Paper">
-
+        select  distinct p.paper_id, paper_title, paper_meeting, paper_date, paper_summary, paper_link, paper_type, paper_publisher_id, paper_publish_time
+        from paper p
+            inner join paper_rd rd on p.paper_id = rd.paper_id
+            inner join research_direction r on rd.rd_id = r.rd_id
+            inner join paper_author a on p.paper_id = a.paper_id
+            inner join user u on p.paper_publisher_id = u.user_id
+        where
+        <if test="value.searchType[0] != '' and value.info[0] != ''">
+            <choose>
+                <when test="value.searchType[0] == 'title'">
+                    paper_title like concat('%',#{value.info[0]},'%')
+                </when>
+                <when test="value.searchType[0] == 'direction'">
+                    rd_name like concat('%',#{value.info[0]},'%')
+                </when>
+                <when test="value.searchType[0] == 'author'">
+                    author_name like concat('%',#{value.info[0]},'%')
+                </when>
+                <when test="value.searchType[0] == 'summary'">
+                    paper_summary like concat('%',#{value.info[0]},'%')
+                </when>
+                <when test="value.searchType[0] == 'publisher'">
+                    user_name like concat('%',#{value.info[0]},'%')
+                </when>
+                <when test="value.searchType[0] == 'meeting'">
+                    paper_meeting like concat('%',#{value.info[0]},'%')
+                </when>
+            </choose>
+        </if>
+        <if test="value.searchType[1] != '' and value.info[1] != '' and value.relation[0] != '' and value.searchType[0] != '' and value.info[0] != ''">
+            <choose>
+                <when test="value.relation[0] == 'or'">
+                    or
+                </when>
+                <when test="value.relation[0] == 'and'">
+                    and
+                </when>
+            </choose>
+        </if>
+        <if test="value.searchType[1] != '' and value.info[1] != ''">
+            <choose>
+                <when test="value.searchType[1] == 'title'">
+                    paper_title like concat('%',#{value.info[1]},'%')
+                </when>
+                <when test="value.searchType[1] == 'direction'">
+                    rd_name like concat('%',#{value.info[1]},'%')
+                </when>
+                <when test="value.searchType[1] == 'author'">
+                    author_name like concat('%',#{value.info[1]},'%')
+                </when>
+                <when test="value.searchType[1] == 'summary'">
+                    paper_summary like concat('%',#{value.info[1]},'%')
+                </when>
+                <when test="value.searchType[1] == 'publisher'">
+                    user_name like concat('%',#{value.info[1]},'%')
+                </when>
+                <when test="value.searchType[1] == 'meeting'">
+                    paper_meeting like concat('%',#{value.info[1]},'%')
+                </when>
+            </choose>
+        </if>
+        <if test="value.searchType[2] != '' and value.info[2] != '' and value.relation[1] != '' and value.searchType[1] != '' and value.info[1] != ''">
+            <choose>
+                <when test="value.relation[1] == 'or'">
+                    or
+                </when>
+                <when test="value.relation[1] == 'and'">
+                    and
+                </when>
+            </choose>
+        </if>
+        <if test="value.searchType[2] != '' and value.info[2] != ''">
+            <choose>
+                <when test="value.searchType[2] == 'title'">
+                    paper_title like concat('%',#{value.info[2]},'%')
+                </when>
+                <when test="value.searchType[2] == 'direction'">
+                    rd_name like concat('%',#{value.info[2]},'%')
+                </when>
+                <when test="value.searchType[2] == 'author'">
+                    author_name like concat('%',#{value.info[2]},'%')
+                </when>
+                <when test="value.searchType[2] == 'summary'">
+                    paper_summary like concat('%',#{value.info[2]},'%')
+                </when>
+                <when test="value.searchType[2] == 'publisher'">
+                    user_name like concat('%',#{value.info[2]},'%')
+                </when>
+                <when test="value.searchType[2] == 'meeting'">
+                    paper_meeting like concat('%',#{value.info[2]},'%')
+                </when>
+            </choose>
+        </if>
+        <if test="value.paperTypeInt.size() != 0">
+            and paper_type in
+            <foreach item="item" collection="value.paperTypeInt" separator="," open="(" close=")" index="index">
+                <if test="item != -1">
+                    #{item}
+                </if>
+            </foreach>
+        </if>
+        <if test="value.timeRange[0] != null">
+            and paper_date &gt; #{value.timeRange[0]}
+        </if>
+        <if test="value.timeRange[1] != null">
+            and paper_date &lt; #{value.timeRange[1]}
+        </if>
+        <choose>
+            <when test="sort == 0">
+                order by paper_date desc
+            </when>
+            <otherwise>
+                order by paper_date asc
+            </otherwise>
+        </choose>
     </select>
     <select id="getPaperByAccount" resultType="com.database.paperms.entity.Paper">
         select paper_id, paper_title, paper_meeting, paper_date, paper_summary, paper_link, paper_type, paper_publisher_id, paper_publish_time

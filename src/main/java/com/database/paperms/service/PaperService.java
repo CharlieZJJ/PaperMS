@@ -5,6 +5,8 @@ import com.database.paperms.entity.vo.AdvancedSearchValue;
 import com.database.paperms.entity.vo.PageHelper;
 import com.database.paperms.entity.vo.PaperVO;
 
+import java.sql.SQLException;
+
 public interface PaperService {
     int savePaper(Paper paper);
 
@@ -18,7 +20,7 @@ public interface PaperService {
 
     PageHelper<PaperVO> list(String type, String cond, int sort, int pageSize, int pageNo);
 
-    PageHelper<PaperVO> advanced_list(AdvancedSearchValue value, int pageSize, int pageNo, int sort);
+    PageHelper<PaperVO> advanced_list(AdvancedSearchValue value, int pageSize, int pageNo, int sort) throws SQLException;
 
     PageHelper<PaperVO> getByAccount(String account, int pageSize, int pageNo, int sort);
 

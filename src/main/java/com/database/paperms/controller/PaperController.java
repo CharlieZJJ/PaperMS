@@ -13,6 +13,8 @@ import com.database.paperms.utils.CopyUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -67,19 +69,52 @@ public class PaperController {
 
     @GetMapping("/list")
     public ResultData research(@RequestParam int pageSize, @RequestParam int pageNo, @RequestParam(required = false) String type, @RequestParam(required = false) String information, @RequestParam(defaultValue = "0") int sort) {
-        if(!type.equals("title") && !type.equals("summary") && !type.equals("direction") && !type.equals("author") && type != null)
-            return ResultData.fail(-1,"无效的类型");
-        if(pageSize <= 0 || pageNo <= 0)
-            return ResultData.fail(-1,"分页有关内容不能为负数");
+        if (!type.equals("title") && !type.equals("summary") && !type.equals("direction") && !type.equals("author") && type != null)
+            return ResultData.fail(-1, "无效的类型");
+        if (pageSize <= 0 || pageNo <= 0)
+            return ResultData.fail(-1, "分页有关内容不能为负数");
         PageHelper<PaperVO> list = paperService.list(type, information, sort, pageSize, pageNo);
         return ResultData.success(list);
     }
 
     @GetMapping("/list/advanced")
-    public ResultData advanced_research(@RequestBody AdvancedSearchValue value, @RequestParam int pageSize, @RequestParam int pageNo, @RequestParam(required = false, defaultValue = "0") int sort){
-        if(pageSize <= 0 || pageNo <= 0)
-            return ResultData.fail(-1,"分页有关内容不能为负数");
-        PageHelper<PaperVO> list = paperService.advanced_list(value, pageSize, pageNo, sort);
+    public ResultData advanced_research(@RequestBody AdvancedSearchValue value, @RequestParam int pageSize, @RequestParam int pageNo, @RequestParam(required = false, defaultValue = "0") int sort) {
+        if (pageSize <= 0 || pageNo <= 0)
+            return ResultData.fail(-1, "分页有关内容不能为负数");
+        ArrayList<Integer> paperTypeInts = new ArrayList<>();
+        for (String s : value.getPaperType()) {
+            int type;
+            switch (s) {
+                case "理论证明型":
+                    type = 0;
+                    break;
+                case "综述型":
+                    type = 1;
+                    break;
+                case "实验型":
+                    type = 2;
+                    break;
+                case "工具型":
+                    type = 3;
+                    break;
+                case "数据集型":
+                    type = 4;
+                    break;
+                case "":
+                    type = -1;
+                    break;
+                default:
+                    return ResultData.fail(-1, "不合理的论文类型");
+            }
+            paperTypeInts.add(type);
+        }
+        value.setPaperTypeInt(paperTypeInts);
+        PageHelper<PaperVO> list = null;
+        try {
+            list = paperService.advanced_list(value, pageSize, pageNo, sort);
+        } catch (SQLException e) {
+            return ResultData.fail(-1,"您的搜索条件有误，请检查！");
+        }
         return ResultData.success(list);
     }
 

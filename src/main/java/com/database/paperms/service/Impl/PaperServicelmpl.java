@@ -10,6 +10,7 @@ import com.database.paperms.utils.CopyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,9 +54,14 @@ public class PaperServicelmpl implements PaperService {
     }
 
     @Override
-    public PageHelper<PaperVO> advanced_list(AdvancedSearchValue value, int pageSize, int pageNo, int sort) {
-
-        return null;
+    public PageHelper<PaperVO> advanced_list(AdvancedSearchValue value, int pageSize, int pageNo, int sort) throws SQLException {
+        List<Paper> papers = null;
+        try {
+            papers = paperMapper.advanced_list(value, pageSize, pageNo, sort);
+        } catch (SQLException e) {
+            throw new SQLException(e);
+        }
+        return getPaperVOPageHelper(pageSize,pageNo,papers);
     }
 
     @Override
