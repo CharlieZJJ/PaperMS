@@ -2,6 +2,7 @@ package com.database.paperms.controller;
 
 import com.database.paperms.entity.Comment;
 import com.database.paperms.entity.Paper;
+import com.database.paperms.entity.vo.AdvancedSearchValue;
 import com.database.paperms.entity.vo.PageHelper;
 import com.database.paperms.entity.vo.PaperVO;
 import com.database.paperms.response.ResultData;
@@ -74,8 +75,13 @@ public class PaperController {
         return ResultData.success(list);
     }
 
-//    @GetMapping("/list/advanced")
-//    public ResultData advanced_research()
+    @GetMapping("/list/advanced")
+    public ResultData advanced_research(@RequestBody AdvancedSearchValue value, int pageSize, int pageNo, @RequestParam(required = false, defaultValue = "0") int sort){
+        if(pageSize <= 0 || pageNo <= 0)
+            return ResultData.fail(-1,"分页有关内容不能为负数");
+        PageHelper<PaperVO> list = paperService.advanced_list(value, pageSize, pageNo, sort);
+        return ResultData.success(list);
+    }
 
 
 }

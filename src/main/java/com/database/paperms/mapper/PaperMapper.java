@@ -4,6 +4,7 @@ import com.database.paperms.entity.FileEntity;
 import com.database.paperms.entity.Paper;
 import com.database.paperms.entity.ResearchDirection;
 import com.database.paperms.entity.SmallPaper;
+import com.database.paperms.entity.vo.AdvancedSearchValue;
 import org.apache.ibatis.annotations.Mapper;
 
 
@@ -33,5 +34,7 @@ public interface PaperMapper {
     List<FileEntity> getPaperAdditionalFile(int paperId);
 
     List<SmallPaper> getSmallPaper(List<Integer> paperCitationId);
+
+    List<Paper> advanced_list(AdvancedSearchValue value, int pageSize, int pageNo, int sort);
 
 }

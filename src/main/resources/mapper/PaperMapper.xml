@@ -96,5 +96,8 @@
             </foreach>
         </where>
     </select>
+    <select id="advanced_list" resultType="com.database.paperms.entity.Paper">
+
+    </select>
 
 </mapper>

@@ -1,6 +1,7 @@
 package com.database.paperms.service.Impl;
 
 import com.database.paperms.entity.Paper;
+import com.database.paperms.entity.vo.AdvancedSearchValue;
 import com.database.paperms.entity.vo.PageHelper;
 import com.database.paperms.entity.vo.PaperVO;
 import com.database.paperms.mapper.PaperMapper;
@@ -69,6 +70,11 @@ public class PaperServicelmpl implements PaperService {
         return paperHelper;
     }
 
+    @Override
+    public PageHelper<PaperVO> advanced_list(AdvancedSearchValue value, int pageSize, int pageNo, int sort) {
 
 
+
+        return null;
+    }
 }

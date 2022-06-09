@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 /**
  * ClassName: com.database.paperms.controller.UserController
@@ -31,6 +32,8 @@ public class UserController {
     private MailUtil mailUtil;
     @Resource
     private Pbkdf2PasswordEncoder passwordEncoder;
+    @Resource
+    private HttpSession session;
 
     private static final int EXPIRE_TIME = 300;
     private static final int CODE_LENGTH = 6;
@@ -90,6 +93,8 @@ public class UserController {
         User user = userService.login(account);
         if(user != null){
             if(passwordEncoder.matches(password,user.getUserPassword())){
+                session.setAttribute("user_id",user.getUserId());
+                session.setAttribute("user_account", user.getUserAccount());
                 return ResultData.success(user);
             }else {
                 return ResultData.fail(ReturnCode.USERNAME_OR_PASSWORD_ERROR);
