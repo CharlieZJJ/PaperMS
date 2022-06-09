@@ -49,6 +49,22 @@ public class PaperServicelmpl implements PaperService {
     @Override
     public PageHelper<PaperVO> list(String type, String cond, int sort, int pageSize, int pageNo) {
         List<Paper> list = paperMapper.list(type, cond, sort);
+        return getPaperVOPageHelper(pageSize, pageNo, list);
+    }
+
+    @Override
+    public PageHelper<PaperVO> advanced_list(AdvancedSearchValue value, int pageSize, int pageNo, int sort) {
+
+        return null;
+    }
+
+    @Override
+    public PageHelper<PaperVO> getByAccount(String account, int pageSize, int pageNo, int sort) {
+        List<Paper> list = paperMapper.getPaperByAccount(account, sort);
+        return getPaperVOPageHelper(pageSize, pageNo, list);
+    }
+
+    private PageHelper<PaperVO> getPaperVOPageHelper(int pageSize, int pageNo, List<Paper> list) {
         int size = list.size();
         int cur = (pageNo - 1) * pageSize;
         int len = Math.min(cur + pageSize, size);
@@ -68,13 +84,5 @@ public class PaperServicelmpl implements PaperService {
         paperHelper.setPageNo(pageNo);
         paperHelper.setPageSize(pageSize);
         return paperHelper;
-    }
-
-    @Override
-    public PageHelper<PaperVO> advanced_list(AdvancedSearchValue value, int pageSize, int pageNo, int sort) {
-
-
-
-        return null;
     }
 }

@@ -2,8 +2,11 @@ package com.database.paperms.controller;
 
 import cn.hutool.core.util.RandomUtil;
 import com.database.paperms.entity.User;
+import com.database.paperms.entity.vo.PageHelper;
+import com.database.paperms.entity.vo.PaperVO;
 import com.database.paperms.response.ResultData;
 import com.database.paperms.response.ReturnCode;
+import com.database.paperms.service.PaperService;
 import com.database.paperms.service.UserService;
 import com.database.paperms.utils.MailUtil;
 import com.database.paperms.utils.RedisUtil;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 /**
  * ClassName: com.database.paperms.controller.UserController
@@ -32,6 +36,9 @@ public class UserController {
     private MailUtil mailUtil;
     @Resource
     private Pbkdf2PasswordEncoder passwordEncoder;
+
+    @Resource
+    private PaperService paperService;
     @Resource
     private HttpSession session;
 
@@ -103,5 +110,21 @@ public class UserController {
             return ResultData.fail(ReturnCode.USERNAME_OR_PASSWORD_ERROR);
         }
     }
+    @GetMapping("/list")
+    public ResultData getUserPaper(@RequestBody Map<String,Object> map){
+        String account = (String) map.get("account");
+        int pageSize = (int) map.get("pageSize");
+        int pageNo = (int) map.get("pageNo");
+        int sort;
+        if(map.containsKey("sort"))
+            sort = (int) map.get("sort");
+        else
+            sort = 0;
+        if(pageSize <= 0 || pageNo <= 0)
+            return ResultData.fail(-1,"分页有关内容不能为负数");
+        PageHelper<PaperVO> list = paperService.getByAccount(account, pageSize, pageNo, sort);
+        return ResultData.success(list);
+    }
+
 
 }

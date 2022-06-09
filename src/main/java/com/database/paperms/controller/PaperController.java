@@ -76,12 +76,11 @@ public class PaperController {
     }
 
     @GetMapping("/list/advanced")
-    public ResultData advanced_research(@RequestBody AdvancedSearchValue value, int pageSize, int pageNo, @RequestParam(required = false, defaultValue = "0") int sort){
+    public ResultData advanced_research(@RequestBody AdvancedSearchValue value, @RequestParam int pageSize, @RequestParam int pageNo, @RequestParam(required = false, defaultValue = "0") int sort){
         if(pageSize <= 0 || pageNo <= 0)
             return ResultData.fail(-1,"分页有关内容不能为负数");
         PageHelper<PaperVO> list = paperService.advanced_list(value, pageSize, pageNo, sort);
         return ResultData.success(list);
     }
-
 
 }

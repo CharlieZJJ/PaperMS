@@ -99,5 +99,18 @@
     <select id="advanced_list" resultType="com.database.paperms.entity.Paper">
 
     </select>
+    <select id="getPaperByAccount" resultType="com.database.paperms.entity.Paper">
+        select paper_id, paper_title, paper_meeting, paper_date, paper_summary, paper_link, paper_type, paper_publisher_id, paper_publish_time
+        from paper inner join user on paper_publisher_id = user_id
+        where user_account = #{account}
+        <choose>
+            <when test="sort == 0">
+                order by paper_date desc
+            </when>
+            <otherwise>
+                order by paper_date asc
+            </otherwise>
+        </choose>
+    </select>
 
 </mapper>

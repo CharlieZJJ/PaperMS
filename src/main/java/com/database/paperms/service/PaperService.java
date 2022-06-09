@@ -20,5 +20,7 @@ public interface PaperService {
 
     PageHelper<PaperVO> advanced_list(AdvancedSearchValue value, int pageSize, int pageNo, int sort);
 
+    PageHelper<PaperVO> getByAccount(String account, int pageSize, int pageNo, int sort);
+
 }
 

@@ -37,4 +37,6 @@ public interface PaperMapper {
 
     List<Paper> advanced_list(AdvancedSearchValue value, int pageSize, int pageNo, int sort);
 
+    List<Paper> getPaperByAccount(String account, int sort);
+
 }
