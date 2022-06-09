@@ -76,5 +76,8 @@ public class PaperController {
         return ResultData.success(list);
     }
 
+//    @GetMapping("/list/advanced")
+//    public ResultData advanced_research()
+
 
 }
