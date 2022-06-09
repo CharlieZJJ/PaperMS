@@ -63,12 +63,12 @@
             </when>
         </choose>
        <choose>
-           <when test="sort = 0">
+           <when test="sort == 0">
                order by paper_date desc
            </when>
-           <when test="sort = 1">
+           <otherwise>
                order by paper_date asc
-           </when>
+           </otherwise>
        </choose>
     </select>
 

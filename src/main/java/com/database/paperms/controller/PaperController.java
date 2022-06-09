@@ -66,12 +66,10 @@ public class PaperController {
 
     @GetMapping("/list")
     public ResultData research(@RequestParam int pageSize, @RequestParam int pageNo, @RequestParam(required = false) String type, @RequestParam(required = false) String information, @RequestParam(defaultValue = "0") int sort) {
-        if(!type.equals("title") && !type.equals("summary") && !type.equals("direction") && !type.equals("author"))
+        if(!type.equals("title") && !type.equals("summary") && !type.equals("direction") && !type.equals("author") && type != null)
             return ResultData.fail(-1,"无效的类型");
         if(pageSize <= 0 || pageNo <= 0)
             return ResultData.fail(-1,"分页有关内容不能为负数");
-        if(sort > 1 || sort < 0)
-            sort = 0;
         PageHelper<PaperVO> list = paperService.list(type, information, sort, pageSize, pageNo);
         return ResultData.success(list);
     }
