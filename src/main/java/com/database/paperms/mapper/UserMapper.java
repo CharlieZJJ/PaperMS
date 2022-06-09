@@ -1,6 +1,7 @@
 package com.database.paperms.mapper;
 
 import com.database.paperms.entity.User;
+import com.database.paperms.entity.vo.UserVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.mybatis.spring.annotation.MapperScan;
 
@@ -19,4 +20,6 @@ public interface UserMapper {
     User getByAccount(String account);
 
     Integer testAccount(String userAccount);
+
+    UserVO getUserById(Integer userId);
 }

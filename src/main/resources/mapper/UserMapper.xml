@@ -21,4 +21,8 @@
         select 1 from user where user_account = #{userAccount} limit 1
     </select>
 
+    <select id="getUserById" resultType="com.database.paperms.entity.vo.UserVO">
+        select user_account,user_name from user where user_id = #{userId}
+    </select>
+
 </mapper>

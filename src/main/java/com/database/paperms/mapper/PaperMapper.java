@@ -1,9 +1,11 @@
 package com.database.paperms.mapper;
 
+import com.database.paperms.entity.FileEntity;
 import com.database.paperms.entity.Paper;
-import com.github.pagehelper.Page;
+import com.database.paperms.entity.ResearchDirection;
+import com.database.paperms.entity.SmallPaper;
 import org.apache.ibatis.annotations.Mapper;
-import org.mybatis.spring.annotation.MapperScan;
+
 
 import java.util.List;
 
@@ -20,14 +22,16 @@ public interface PaperMapper {
 
     int updatePaper(Paper paper);
 
-    Page<Paper> list(String type, String cond, int sort);
+    List<Paper> list(String type, String cond, int sort);
 
     List<String> getPaperAuthor(int paperId);
 
     List<Integer> getPaperCitation(int paperId);
 
-    List<String> getPaperRd(int paperId);
+    List<ResearchDirection> getPaperRd(int paperId);
 
-    List<String> getPaperAdditionalFile(int paperId);
+    List<FileEntity> getPaperAdditionalFile(int paperId);
+
+    List<SmallPaper> getSmallPaper(List<Integer> paperCitationId);
 
 }
