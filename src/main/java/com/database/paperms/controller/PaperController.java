@@ -76,7 +76,7 @@ public class PaperController {
         return ResultData.success(list);
     }
 
-    @GetMapping("/list/advanced")
+    @PostMapping("/list/advanced")
     public ResultData advanced_research(@RequestBody AdvancedSearchValue value, @RequestParam int pageSize, @RequestParam int pageNo, @RequestParam(required = false, defaultValue = "0") int sort) {
         if (pageSize <= 0 || pageNo <= 0)
             return ResultData.fail(-1, "分页有关内容不能为负数");
