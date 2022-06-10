@@ -15,35 +15,35 @@ import java.sql.SQLException;
  * Created by zjj
  * Date: 2022-05-05 18:13
  */
-public class AutoEnumTypeHandler <E extends Enum<E>> extends BaseTypeHandler<E> {
+public class AutoEnumTypeHandler<E extends Enum<E>> extends BaseTypeHandler<E> {
 
     private final BaseTypeHandler<E> typeHandler;
 
-    public AutoEnumTypeHandler(Class<E> type){
-        if(type == null)
+    public AutoEnumTypeHandler(Class<E> type) {
+        if (type == null)
             throw new IllegalArgumentException("Type can not be null!!");
-        if(IEnum.class.isAssignableFrom(type))
+        if (IEnum.class.isAssignableFrom(type))
             typeHandler = new IEnumTypeHandler(type);
         else typeHandler = new EnumOrdinalTypeHandler<>(type);
     }
 
     @Override
     public void setNonNullParameter(PreparedStatement preparedStatement, int i, E e, JdbcType jdbcType) throws SQLException {
-        typeHandler.setNonNullParameter(preparedStatement,i,e,jdbcType);
+        typeHandler.setNonNullParameter(preparedStatement, i, e, jdbcType);
     }
 
     @Override
     public E getNullableResult(ResultSet resultSet, String s) throws SQLException {
-        return typeHandler.getNullableResult(resultSet,s);
+        return typeHandler.getNullableResult(resultSet, s);
     }
 
     @Override
     public E getNullableResult(ResultSet resultSet, int i) throws SQLException {
-        return typeHandler.getNullableResult(resultSet,i);
+        return typeHandler.getNullableResult(resultSet, i);
     }
 
     @Override
     public E getNullableResult(CallableStatement callableStatement, int i) throws SQLException {
-        return typeHandler.getNullableResult(callableStatement,i);
+        return typeHandler.getNullableResult(callableStatement, i);
     }
 }

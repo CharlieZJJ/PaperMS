@@ -8,11 +8,11 @@ import com.database.paperms.entity.type.IEnum;
  * Date: 2022-05-04 22:47
  */
 public enum Permission implements IEnum {
-    ADMIN(1,"管理员"),
-    USER(0,"用户");
+    ADMIN(1, "管理员"),
+    USER(0, "用户");
 
-    private Integer code;
-    private String value;
+    private final Integer code;
+    private final String value;
 
     Permission(int code, String value) {
         this.code = code;

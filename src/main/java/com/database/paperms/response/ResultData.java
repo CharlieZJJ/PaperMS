@@ -5,7 +5,7 @@ package com.database.paperms.response;
  * Created by zjj
  * Date: 2022-05-06 14:50
  */
-public class ResultData<T>{
+public class ResultData<T> {
 
     private int status;
     private String message;
@@ -20,19 +20,7 @@ public class ResultData<T>{
         this.data = data;
     }
 
-    public int getStatus() {
-        return status;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public static <T> ResultData<T> success(T data){
+    public static <T> ResultData<T> success(T data) {
         ResultData<T> resultData = new ResultData<>();
         resultData.setStatus(ReturnCode.RC100.getCode());
         resultData.setMessage(ReturnCode.RC100.getMessage());
@@ -40,7 +28,7 @@ public class ResultData<T>{
         return resultData;
     }
 
-    public static <T> ResultData<T> success(){
+    public static <T> ResultData<T> success() {
         ResultData<T> resultData = new ResultData<>();
         resultData.setStatus(ReturnCode.RC100.getCode());
         resultData.setMessage(ReturnCode.RC100.getMessage());
@@ -54,19 +42,31 @@ public class ResultData<T>{
         return resultData;
     }
 
-    public static <T> ResultData<T> fail(ReturnCode returnCode){
+    public static <T> ResultData<T> fail(ReturnCode returnCode) {
         ResultData<T> resultData = new ResultData<>();
         resultData.setStatus(returnCode.getCode());
         resultData.setMessage(returnCode.getMessage());
         return resultData;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
     public void setStatus(int status) {
         this.status = status;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public T getData() {
+        return data;
     }
 
     public void setData(T data) {

@@ -2,7 +2,7 @@ package com.database.paperms.entity;
 
 import java.util.List;
 
-public class SmallPaper{
+public class SmallPaper {
     private Integer paperId;
     private String paperTitle;
     private List<String> paperAuthor;

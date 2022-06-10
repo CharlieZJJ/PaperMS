@@ -14,13 +14,11 @@ import javax.annotation.Resource;
  */
 @Component
 public class MailUtil {
+    public static final String TEXT = "这是PaperMS系统注册验证码，请您在五分钟以内输入，否则失效。\n\n";
     @Value("${spring.mail.username}")
     private String from;
     @Value("${spring.mail.nickname}")
     private String nickname;
-
-    public static final String TEXT = "这是PaperMS系统注册验证码，请您在五分钟以内输入，否则失效。\n\n";
-
     @Resource
     private JavaMailSender mailSender;
 

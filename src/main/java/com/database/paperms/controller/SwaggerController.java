@@ -3,8 +3,6 @@ package com.database.paperms.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.print.DocFlavor;
-
 /**
  * ClassName: com.database.paperms.controller.SwaggerController
  * Created by zjj
@@ -13,5 +11,7 @@ import javax.print.DocFlavor;
 @Controller
 public class SwaggerController {
     @RequestMapping("/api")
-    public String index() {return "redirect:swagger-ui.html";}
+    public String index() {
+        return "redirect:swagger-ui.html";
+    }
 }

@@ -5,7 +5,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 public class AdvancedSearchValue implements Serializable {
 

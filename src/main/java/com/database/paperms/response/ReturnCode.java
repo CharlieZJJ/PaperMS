@@ -52,14 +52,14 @@ public enum ReturnCode {
     CLIENT_AUTHENTICATION_FAILED(1001, "客户端认证失败"),
     USERNAME_OR_PASSWORD_ERROR(1002, "用户名或密码错误"),
     UNSUPPORTED_GRANT_TYPE(1003, "不支持的认证模式"),
-    INVALID_EMAIL(1004,"不合法的邮箱"),
-    CLASS_CAST_ERROR(1005,"出错了！"),
-    USED_EMAIL(1006,"邮箱已被注册！"),
-    NOT_EXISTENT_PAPER_ID(1007,"此论文的ID不存在！"),
-    USED_PAPER_ID(1008,"此论文ID号已经被使用！"),
-    NOT_EXISTENT_COMMENT(1009,"此评论不存在！"),
-    USED_PAPER_LINK(1010,"该论文链接已经存在！"),
-    NOT_EXISTENT_REPLY(1011,"此回复不存在！");
+    INVALID_EMAIL(1004, "不合法的邮箱"),
+    CLASS_CAST_ERROR(1005, "出错了！"),
+    USED_EMAIL(1006, "邮箱已被注册！"),
+    NOT_EXISTENT_PAPER_ID(1007, "此论文的ID不存在！"),
+    USED_PAPER_ID(1008, "此论文ID号已经被使用！"),
+    NOT_EXISTENT_COMMENT(1009, "此评论不存在！"),
+    USED_PAPER_LINK(1010, "该论文链接已经存在！"),
+    NOT_EXISTENT_REPLY(1011, "此回复不存在！");
     /**
      * 自定义状态码
      **/

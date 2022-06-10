@@ -1,7 +1,6 @@
 package com.database.paperms.service;
 
 import com.database.paperms.entity.Comment;
-import com.database.paperms.mapper.CommentMapper;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.database.paperms.entity;
 
-public class FileEntity{
+public class FileEntity {
     String path;
     String file_name;
     String file_size;

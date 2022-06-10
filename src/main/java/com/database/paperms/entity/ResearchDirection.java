@@ -10,7 +10,7 @@ public class ResearchDirection implements Serializable {
 
     private String rdName;
 
-    public ResearchDirection(){
+    public ResearchDirection() {
     }
 
     public ResearchDirection(String rdId, String rdName) {

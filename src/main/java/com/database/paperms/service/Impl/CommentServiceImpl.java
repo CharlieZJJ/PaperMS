@@ -1,7 +1,6 @@
 package com.database.paperms.service.Impl;
 
 import com.database.paperms.entity.Comment;
-import com.database.paperms.entity.Reply;
 import com.database.paperms.mapper.CommentMapper;
 import com.database.paperms.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,21 +16,23 @@ public class CommentServiceImpl implements CommentService {
     private CommentMapper commentMapper;
 
     @Override
-    public int saveComment(Comment comment){
+    public int saveComment(Comment comment) {
         return commentMapper.insertComment(comment);
     }
 
     @Override
-    public int deleteComment(Integer commentId){
+    public int deleteComment(Integer commentId) {
         return commentMapper.deleteComment(commentId);
     }
 
     @Override
-    public Comment getComment(Integer commentId){
+    public Comment getComment(Integer commentId) {
         return commentMapper.getComment(commentId);
     }
 
     @Override
-    public List<Comment> getByPaperId(Integer paperId){ return commentMapper.getByPaperId(paperId); }
+    public List<Comment> getByPaperId(Integer paperId) {
+        return commentMapper.getByPaperId(paperId);
+    }
 
 }

@@ -7,7 +7,7 @@
 
     <insert id="insertReply" useGeneratedKeys="true" keyProperty="replyId">
         insert into reply(comment_id, reply_user_id, reply_user_to_id, reply_content, reply_date)
-        values(#{commentId},#{replyUserId},#{replyUserToId},#{replyContent},#{replyDate})
+        values (#{commentId}, #{replyUserId}, #{replyUserToId}, #{replyContent}, #{replyDate})
     </insert>
 
     <delete id="deleteReply">

@@ -61,7 +61,7 @@ public class PaperServicelmpl implements PaperService {
         } catch (SQLException e) {
             throw new SQLException(e);
         }
-        return getPaperVOPageHelper(pageSize,pageNo,papers);
+        return getPaperVOPageHelper(pageSize, pageNo, papers);
     }
 
     @Override

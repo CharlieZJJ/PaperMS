@@ -5,8 +5,6 @@ import com.database.paperms.entity.vo.AdvancedSearchValue;
 import com.database.paperms.entity.vo.PageHelper;
 import com.database.paperms.entity.vo.PaperVO;
 
-import java.sql.SQLException;
-
 public interface PaperService {
     int savePaper(Paper paper);
 

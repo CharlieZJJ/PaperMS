@@ -9,18 +9,18 @@ import com.database.paperms.entity.type.IEnum;
  */
 public enum PaperType implements IEnum {
 
-    THEORY_PROOF(0,"理论证明型"),
+    THEORY_PROOF(0, "理论证明型"),
 
-    REVIEW(1,"综述型"),
+    REVIEW(1, "综述型"),
 
-    EXPERIMENTAL(2,"实验型"),
+    EXPERIMENTAL(2, "实验型"),
 
-    TOOL(3,"工具型"),
+    TOOL(3, "工具型"),
 
-    DATA_SET(4,"数据集型");
+    DATA_SET(4, "数据集型");
 
-    private Integer code;
-    private String value;
+    private final Integer code;
+    private final String value;
 
     PaperType(int code, String value) {
         this.code = code;

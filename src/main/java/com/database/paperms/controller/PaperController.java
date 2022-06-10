@@ -13,7 +13,6 @@ import com.database.paperms.utils.CopyUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,7 +112,7 @@ public class PaperController {
         try {
             list = paperService.advanced_list(value, pageSize, pageNo, sort);
         } catch (Exception e) {
-            return ResultData.fail(-1,"您的搜索条件有误，请检查！");
+            return ResultData.fail(-1, "您的搜索条件有误，请检查！");
         }
         return ResultData.success(list);
     }

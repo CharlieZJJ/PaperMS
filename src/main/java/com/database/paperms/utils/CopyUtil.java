@@ -19,7 +19,7 @@ public class CopyUtil {
     @Resource
     private PaperMapper paperMapper;
 
-    public PaperVO fromPaper(Paper paper){
+    public PaperVO fromPaper(Paper paper) {
         Integer paperId = paper.getPaperId();
         PaperVO paperVO = new PaperVO();
         paperVO.setPaperId(paperId);
@@ -34,7 +34,7 @@ public class CopyUtil {
         paperVO.setPaperAdditionalFile(paperMapper.getPaperAdditionalFile(paperId));
         paperVO.setPaperAuthor(paperMapper.getPaperAuthor(paperId));
         List<Integer> paperCitations = paper.getPaperCitation();
-        if(!paperCitations.isEmpty()) {
+        if (!paperCitations.isEmpty()) {
             List<SmallPaper> smallPapers = paperMapper.getSmallPaper(paper.getPaperCitation());
             for (SmallPaper smallPaper : smallPapers)
                 smallPaper.setPaperAuthor(paperMapper.getPaperAuthor(smallPaper.getPaperId()));

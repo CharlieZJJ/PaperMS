@@ -2,6 +2,7 @@ package com.database.paperms.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * ClassName: com.database.paperms.entity.Reply
@@ -86,10 +87,10 @@ public class Reply implements Serializable {
 
         Reply reply = (Reply) o;
 
-        if (commentId != null ? !commentId.equals(reply.commentId) : reply.commentId != null) return false;
+        if (!Objects.equals(commentId, reply.commentId)) return false;
         if (!replyId.equals(reply.replyId)) return false;
-        if (replyUserId != null ? !replyUserId.equals(reply.replyUserId) : reply.replyUserId != null) return false;
-        if (replyUserToId != null ? !replyUserToId.equals(reply.replyUserToId) : reply.replyUserToId != null)
+        if (!Objects.equals(replyUserId, reply.replyUserId)) return false;
+        if (!Objects.equals(replyUserToId, reply.replyUserToId))
             return false;
         if (!replyContent.equals(reply.replyContent)) return false;
         return replyDate.equals(reply.replyDate);

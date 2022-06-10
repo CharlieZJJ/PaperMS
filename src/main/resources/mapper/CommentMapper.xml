@@ -7,7 +7,7 @@
 
     <insert id="insertComment" useGeneratedKeys="true" keyProperty="commentId">
         insert into comment(paper_id, comment_user_id, comment_content, comment_date)
-        values(#{paperId},#{commentUserId},#{commentContent},#{commentDate})
+        values (#{paperId}, #{commentUserId}, #{commentContent}, #{commentDate})
     </insert>
 
     <delete id="deleteComment">

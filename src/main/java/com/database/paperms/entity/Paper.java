@@ -5,6 +5,7 @@ import com.database.paperms.entity.type.Impl.PaperType;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * ClassName: com.database.paperms.entity.Paper
@@ -168,10 +169,10 @@ public class Paper implements Serializable {
         if (paperType != paper.paperType) return false;
         if (!paperPublisherId.equals(paper.paperPublisherId)) return false;
         if (!paperPublishTime.equals(paper.paperPublishTime)) return false;
-        if (paperAdditionalFile != null ? !paperAdditionalFile.equals(paper.paperAdditionalFile) : paper.paperAdditionalFile != null)
+        if (!Objects.equals(paperAdditionalFile, paper.paperAdditionalFile))
             return false;
         if (!paperAuthor.equals(paper.paperAuthor)) return false;
-        if (paperCitation != null ? !paperCitation.equals(paper.paperCitation) : paper.paperCitation != null)
+        if (!Objects.equals(paperCitation, paper.paperCitation))
             return false;
         return paperRd.equals(paper.paperRd);
     }

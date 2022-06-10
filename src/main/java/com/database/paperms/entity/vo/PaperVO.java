@@ -4,7 +4,6 @@ import com.database.paperms.entity.FileEntity;
 import com.database.paperms.entity.ResearchDirection;
 import com.database.paperms.entity.SmallPaper;
 
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;

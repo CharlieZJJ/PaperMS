@@ -3,7 +3,6 @@ package com.database.paperms.mapper;
 import com.database.paperms.entity.User;
 import com.database.paperms.entity.vo.UserVO;
 import org.apache.ibatis.annotations.Mapper;
-import org.mybatis.spring.annotation.MapperScan;
 
 /**
  * ClassName: com.database.paperms.mapper.UserMapper

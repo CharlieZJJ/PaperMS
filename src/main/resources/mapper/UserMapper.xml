@@ -6,23 +6,32 @@
 <mapper namespace="com.database.paperms.mapper.UserMapper">
 
     <select id="getById" resultType="com.database.paperms.entity.User">
-        select * from user where user_id = #{id}
+        select *
+        from user
+        where user_id = #{id}
     </select>
 
     <insert id="insertUser" useGeneratedKeys="true" keyProperty="userId">
-        insert into user(user_name,user_account,user_password) values(#{userName}, #{userAccount}, #{userPassword})
+        insert into user(user_name, user_account, user_password)
+        values (#{userName}, #{userAccount}, #{userPassword})
     </insert>
 
     <select id="getByAccount" resultType="com.database.paperms.entity.User">
-        select * from user where user_account = #{account}
+        select *
+        from user
+        where user_account = #{account}
     </select>
 
     <select id="testAccount" resultType="int">
-        select 1 from user where user_account = #{userAccount} limit 1
+        select 1
+        from user
+        where user_account = #{userAccount} limit 1
     </select>
 
     <select id="getUserById" resultType="com.database.paperms.entity.vo.UserVO">
-        select user_account,user_name from user where user_id = #{userId}
+        select user_account, user_name
+        from user
+        where user_id = #{userId}
     </select>
 
 </mapper>

@@ -1,9 +1,7 @@
 package com.database.paperms.mapper;
 
 import com.database.paperms.entity.Comment;
-import com.database.paperms.entity.Reply;
 import org.apache.ibatis.annotations.Mapper;
-import org.mybatis.spring.annotation.MapperScan;
 
 import java.util.List;
 

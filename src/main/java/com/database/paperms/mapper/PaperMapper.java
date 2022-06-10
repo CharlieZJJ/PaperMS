@@ -7,7 +7,6 @@ import com.database.paperms.entity.SmallPaper;
 import com.database.paperms.entity.vo.AdvancedSearchValue;
 import org.apache.ibatis.annotations.Mapper;
 
-
 import java.util.List;
 
 @Mapper

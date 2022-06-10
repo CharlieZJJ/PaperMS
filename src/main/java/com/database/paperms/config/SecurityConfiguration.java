@@ -28,7 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public Pbkdf2PasswordEncoder bcryptPasswordEncoder(){
+    public Pbkdf2PasswordEncoder bcryptPasswordEncoder() {
         return new Pbkdf2PasswordEncoder(PRIVATE_KEY);
     }
 }

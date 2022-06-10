@@ -19,7 +19,7 @@ public class RestExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ResultData<String> exception(Exception e){
+    public ResultData<String> exception(Exception e) {
         return ResultData.fail(ReturnCode.RC500.getCode(), e.getMessage());
     }
 
