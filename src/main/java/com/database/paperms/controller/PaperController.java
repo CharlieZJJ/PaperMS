@@ -81,31 +81,34 @@ public class PaperController {
         if (pageSize <= 0 || pageNo <= 0)
             return ResultData.fail(-1, "分页有关内容不能为负数");
         ArrayList<Integer> paperTypeInts = new ArrayList<>();
-        for (String s : value.getPaperType()) {
-            int type;
-            switch (s) {
-                case "理论证明型":
-                    type = 0;
-                    break;
-                case "综述型":
-                    type = 1;
-                    break;
-                case "实验型":
-                    type = 2;
-                    break;
-                case "工具型":
-                    type = 3;
-                    break;
-                case "数据集型":
-                    type = 4;
-                    break;
-                case "":
-                    type = -1;
-                    break;
-                default:
-                    return ResultData.fail(-1, "不合理的论文类型");
+        List<String> paperType = value.getPaperType();
+        if(paperType.size() != 0) {
+            for (String s : paperType) {
+                int type;
+                switch (s) {
+                    case "理论证明型":
+                        type = 0;
+                        break;
+                    case "综述型":
+                        type = 1;
+                        break;
+                    case "实验型":
+                        type = 2;
+                        break;
+                    case "工具型":
+                        type = 3;
+                        break;
+                    case "数据集型":
+                        type = 4;
+                        break;
+                    case "":
+                        type = -1;
+                        break;
+                    default:
+                        return ResultData.fail(-1, "不合理的论文类型");
+                }
+                paperTypeInts.add(type);
             }
-            paperTypeInts.add(type);
         }
         value.setPaperTypeInt(paperTypeInts);
         PageHelper<PaperVO> list = null;

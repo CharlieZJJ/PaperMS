@@ -210,10 +210,10 @@
             </foreach>
         </if>
         <if test="value.timeRange[0] != null">
-            and paper_date &gt; #{value.timeRange[0]}
+            and paper_date &gt;= #{value.timeRange[0]}
         </if>
         <if test="value.timeRange[1] != null">
-            and paper_date &lt; #{value.timeRange[1]}
+            and paper_date &lt;= #{value.timeRange[1]}
         </if>
         <choose>
             <when test="sort == 0">
