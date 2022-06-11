@@ -2,13 +2,13 @@ package com.database.paperms.entity;
 
 public class FileEntity {
     String path;
-    String file_name;
-    String file_size;
+    String fileName;
+    Double fileSize;
 
-    public FileEntity(String path, String file_name, String file_size) {
+    public FileEntity(String path, String fileName, Double fileSize) {
         this.path = path;
-        this.file_name = file_name;
-        this.file_size = file_size;
+        this.fileName = fileName;
+        this.fileSize = fileSize;
     }
 
     public FileEntity() {
@@ -22,19 +22,19 @@ public class FileEntity {
         this.path = path;
     }
 
-    public String getFile_name() {
-        return file_name;
+    public String getFileName() {
+        return fileName;
     }
 
-    public void setFile_name(String file_name) {
-        this.file_name = file_name;
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
-    public String getFile_size() {
-        return file_size;
+    public Double getFileSize() {
+        return fileSize;
     }
 
-    public void setFile_size(String file_size) {
-        this.file_size = file_size;
+    public void setFileSize(Double fileSize) {
+        this.fileSize = fileSize;
     }
 }

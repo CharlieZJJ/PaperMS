@@ -38,4 +38,6 @@ public interface PaperMapper {
 
     List<Paper> getPaperByAccount(String account, int sort);
 
+    List<Paper> getByRd(String rd);
+
 }

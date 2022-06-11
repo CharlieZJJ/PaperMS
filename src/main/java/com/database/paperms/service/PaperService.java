@@ -22,5 +22,7 @@ public interface PaperService {
 
     PageHelper<PaperVO> getByAccount(String account, int pageSize, int pageNo, int sort);
 
+    PageHelper<PaperVO> getByRd(int pageSize, int pageNo, String rd);
+
 }
 

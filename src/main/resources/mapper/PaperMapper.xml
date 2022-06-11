@@ -238,5 +238,20 @@
             </otherwise>
         </choose>
     </select>
+    <select id="getByRd" resultType="com.database.paperms.entity.Paper">
+        select p.paper_id,
+               paper_title,
+               paper_meeting,
+               paper_date,
+               paper_summary,
+               paper_link,
+               paper_type,
+               paper_publisher_id,
+               paper_publish_time
+        from paper p
+                 inner join paper_rd pr on p.paper_id = pr.paper_id
+                 inner join research_direction rd on pr.rd_id = rd.rd_id
+        where rd_name like concat('%', #{rd}, '%')
+    </select>
 
 </mapper>

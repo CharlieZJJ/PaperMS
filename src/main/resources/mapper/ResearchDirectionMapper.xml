@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.database.paperms.mapper.ResearchDirectionMapper">
+
+    <select id="list" resultType="com.database.paperms.entity.ResearchDirection">
+        select rd_id, rd_name
+        from research_direction
+        order by rd_id
+    </select>
+</mapper>

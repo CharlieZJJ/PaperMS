@@ -91,4 +91,10 @@ public class PaperServicelmpl implements PaperService {
         paperHelper.setPageSize(pageSize);
         return paperHelper;
     }
+
+    @Override
+    public PageHelper<PaperVO> getByRd(int pageSize, int pageNo, String rd) {
+        List<Paper> list = paperMapper.getByRd(rd);
+        return getPaperVOPageHelper(pageSize, pageNo, list);
+    }
 }

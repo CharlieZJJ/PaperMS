@@ -1,7 +1,5 @@
 package com.database.paperms;
 
-import cn.hutool.core.util.RandomUtil;
-import com.database.paperms.entity.User;
 import com.database.paperms.service.UserService;
 import com.database.paperms.utils.MailUtil;
 import com.database.paperms.utils.RedisUtil;
@@ -33,7 +31,7 @@ class PaperMsApplicationTests {
     }
 
     @Test
-    void test(){
+    void test() {
 
     }
 

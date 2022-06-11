@@ -82,7 +82,7 @@ public class PaperController {
             return ResultData.fail(-1, "分页有关内容不能为负数");
         ArrayList<Integer> paperTypeInts = new ArrayList<>();
         List<String> paperType = value.getPaperType();
-        if(paperType.size() != 0) {
+        if (paperType.size() != 0) {
             for (String s : paperType) {
                 int type;
                 switch (s) {
