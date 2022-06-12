@@ -303,5 +303,25 @@
                  inner join research_direction rd on pr.rd_id = rd.rd_id
         where rd_name like concat('%', #{rd}, '%')
     </select>
+    <select id="countByUserId" resultType="java.lang.Integer">
+        select count(0)
+        from paper
+        where paper_publisher_id = #{userId}
+    </select>
+    <select id="countByUserIdWithRange" resultType="java.lang.Integer">
+        select count(0)
+        from paper
+        where paper_publisher_id = #{userId}
+          and paper_publish_time &gt;= #{lowerBound}
+          and paper_publish_time &lt;= now()
+    </select>
+    <select id="countRd" resultType="com.database.paperms.entity.vo.rdCount">
+        select rd_name, count(1) as count
+        from paper
+                 inner join paper_rd pr on paper.paper_id = pr.paper_id
+                 inner join research_direction rd on pr.rd_id = rd.rd_id
+        where paper_publisher_id = #{userId}
+        group by rd_name
+    </select>
 
 </mapper>

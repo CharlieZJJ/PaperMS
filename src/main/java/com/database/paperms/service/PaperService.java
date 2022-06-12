@@ -2,6 +2,7 @@ package com.database.paperms.service;
 
 import com.database.paperms.entity.Paper;
 import com.database.paperms.entity.vo.AdvancedSearchValue;
+import com.database.paperms.entity.vo.Data;
 import com.database.paperms.entity.vo.PageHelper;
 import com.database.paperms.entity.vo.PaperVO;
 
@@ -27,6 +28,8 @@ public interface PaperService {
     PageHelper<PaperVO> getByAccount(String account, int pageSize, int pageNo, int sort);
 
     PageHelper<PaperVO> getByRd(int pageSize, int pageNo, String rd);
+
+    Data count(int timeRange, int userId);
 
 }
 

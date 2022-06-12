@@ -5,9 +5,13 @@ import com.database.paperms.entity.Paper;
 import com.database.paperms.entity.ResearchDirection;
 import com.database.paperms.entity.SmallPaper;
 import com.database.paperms.entity.vo.AdvancedSearchValue;
+import com.database.paperms.entity.vo.rdCount;
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface PaperMapper {
@@ -57,5 +61,12 @@ public interface PaperMapper {
     List<Paper> getPaperByAccount(String account, int sort);
 
     List<Paper> getByRd(String rd);
+
+    int countByUserId(int userId);
+
+    int countByUserIdWithRange(Date lowerBound, Integer userId);
+
+    @MapKey("rd_name")
+    List<rdCount> countRd(Integer userId);
 
 }

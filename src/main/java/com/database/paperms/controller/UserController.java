@@ -2,6 +2,7 @@ package com.database.paperms.controller;
 
 import cn.hutool.core.util.RandomUtil;
 import com.database.paperms.entity.User;
+import com.database.paperms.entity.vo.Data;
 import com.database.paperms.entity.vo.PageHelper;
 import com.database.paperms.entity.vo.PaperVO;
 import com.database.paperms.response.ResultData;
@@ -122,10 +123,13 @@ public class UserController {
         return ResultData.success(list);
     }
 
-//    @GetMapping("/statistics")
-//    public ResultData statistics(){
-//        Integer userId = (Integer) session.getAttribute("user_id");
-//    }
+    @GetMapping("/statistics")
+    public ResultData statistics(@RequestParam(defaultValue = "0")Integer timeRange){
+//        Integer user_id = (Integer) session.getAttribute("user_id");
+        int user_id = 1;
+        Data count = paperService.count(timeRange, user_id);
+        return ResultData.success(count);
+    }
 
 
 

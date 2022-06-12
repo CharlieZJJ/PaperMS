@@ -1,10 +1,11 @@
 package com.database.paperms.service.Impl;
 
+import cn.hutool.core.date.DateField;
+import cn.hutool.core.date.DateUnit;
+import cn.hutool.core.date.DateUtil;
 import com.database.paperms.entity.FileEntity;
 import com.database.paperms.entity.Paper;
-import com.database.paperms.entity.vo.AdvancedSearchValue;
-import com.database.paperms.entity.vo.PageHelper;
-import com.database.paperms.entity.vo.PaperVO;
+import com.database.paperms.entity.vo.*;
 import com.database.paperms.mapper.PaperMapper;
 import com.database.paperms.service.PaperService;
 import com.database.paperms.utils.CopyUtil;
@@ -12,9 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class PaperServicelmpl implements PaperService {
@@ -132,5 +131,13 @@ public class PaperServicelmpl implements PaperService {
     public PageHelper<PaperVO> getByRd(int pageSize, int pageNo, String rd) {
         List<Paper> list = paperMapper.getByRd(rd);
         return getPaperVOPageHelper(pageSize, pageNo, list);
+    }
+
+    @Override
+    public Data count(int timeRange, int userId) {
+        List<rdCount> rdCounts = paperMapper.countRd(userId);
+        int i = paperMapper.countByUserId(userId);
+        int withRange = paperMapper.countByUserIdWithRange(DateUtil.offsetDay(new Date(), -timeRange), userId);
+        return new Data(i, rdCounts,withRange, timeRange);
     }
 }
