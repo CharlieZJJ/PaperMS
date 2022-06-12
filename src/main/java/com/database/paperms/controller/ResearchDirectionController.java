@@ -1,13 +1,10 @@
 package com.database.paperms.controller;
 
 
-import com.database.paperms.entity.Paper;
-import com.database.paperms.entity.Reply;
 import com.database.paperms.entity.ResearchDirection;
 import com.database.paperms.entity.vo.PageHelper;
 import com.database.paperms.entity.vo.PaperVO;
 import com.database.paperms.response.ResultData;
-import com.database.paperms.response.ReturnCode;
 import com.database.paperms.service.PaperService;
 import com.database.paperms.service.ResearchDirectionService;
 import com.database.paperms.utils.TreeNode;

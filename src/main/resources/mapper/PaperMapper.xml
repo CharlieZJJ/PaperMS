@@ -28,7 +28,7 @@
     </insert>
 
     <insert id="insertPaperAdditionalFile" parameterType="com.database.paperms.entity.Paper">
-        insert into paper_additional_file(paper_id, file_path ,file_name, file_size)
+        insert into paper_additional_file(paper_id, file_path, file_name, file_size)
         values (#{paperId}, #{filePath}, #{fileName}, #{fileSize})
     </insert>
 

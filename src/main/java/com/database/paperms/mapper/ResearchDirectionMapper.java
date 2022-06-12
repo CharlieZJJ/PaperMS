@@ -1,7 +1,5 @@
 package com.database.paperms.mapper;
 
-import com.database.paperms.entity.Paper;
-import com.database.paperms.entity.Reply;
 import com.database.paperms.entity.ResearchDirection;
 import org.apache.ibatis.annotations.Mapper;
 

@@ -1,6 +1,7 @@
 package com.database.paperms.service;
 
 import com.database.paperms.entity.User;
+import com.database.paperms.entity.vo.PageHelper;
 
 /**
  * ClassName: com.database.paperms.service.UserService
@@ -15,5 +16,11 @@ public interface UserService {
     User login(String userAccount);
 
     boolean accountExist(String account);
+
+    boolean upgrade(Integer userId);
+
+    boolean delete(Integer userId);
+
+    PageHelper<User> list(int pageSize, int pageNo);
 
 }

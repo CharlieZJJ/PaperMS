@@ -2,7 +2,6 @@ package com.database.paperms.service.Impl;
 
 import com.database.paperms.entity.FileEntity;
 import com.database.paperms.entity.Paper;
-import com.database.paperms.entity.ResearchDirection;
 import com.database.paperms.entity.vo.AdvancedSearchValue;
 import com.database.paperms.entity.vo.PageHelper;
 import com.database.paperms.entity.vo.PaperVO;
@@ -35,24 +34,24 @@ public class PaperServicelmpl implements PaperService {
         List<String> authorlist = paper.getPaperAuthor();
         List<Integer> citationlist = paper.getPaperCitation();
         List<FileEntity> fileList = paper.getPaperAdditionalFile();
-        for(int i=0;i<rdlist.size();i++){
+        for (int i = 0; i < rdlist.size(); i++) {
             String rdId = rdlist.get(i);
-            paperMapper.insertPaperRd(paperId,rdId);
+            paperMapper.insertPaperRd(paperId, rdId);
         }
-        for(int i=0;i<authorlist.size();i++){
+        for (int i = 0; i < authorlist.size(); i++) {
             String authorName = authorlist.get(i);
-            paperMapper.insertPaperAuthor(paperId,authorName);
+            paperMapper.insertPaperAuthor(paperId, authorName);
         }
-        for(int i=0;i<citationlist.size();i++){
+        for (int i = 0; i < citationlist.size(); i++) {
             Integer citationId = citationlist.get(i);
-            paperMapper.insertPaperCitation(paperId,citationId);
+            paperMapper.insertPaperCitation(paperId, citationId);
         }
-        for(int i=0;i<fileList.size();i++){
+        for (int i = 0; i < fileList.size(); i++) {
             FileEntity file = fileList.get(i);
             String filePath = file.getPath();
             String fileName = file.getFileName();
             Double fileSize = file.getFileSize();
-            paperMapper.insertPaperAdditionalFile(paperId,filePath,fileName,fileSize);
+            paperMapper.insertPaperAdditionalFile(paperId, filePath, fileName, fileSize);
         }
         return 1;
     }

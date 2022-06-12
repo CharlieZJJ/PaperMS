@@ -20,6 +20,16 @@ public class ResultData<T> {
         this.data = data;
     }
 
+    public ResultData(int status, String message) {
+        this.status = status;
+        this.message = message;
+    }
+
+    public ResultData(ReturnCode code) {
+        this.status = code.getCode();
+        this.message = code.getMessage();
+    }
+
     public static <T> ResultData<T> success(T data) {
         ResultData<T> resultData = new ResultData<>();
         resultData.setStatus(ReturnCode.RC100.getCode());

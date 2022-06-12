@@ -61,8 +61,7 @@ mybatis:
     default-enum-type-handler: com.database.paperms.handler.AutoEnumTypeHandler
   type-aliases-package: com.database.paperms.entity
 
-pagehelper:
-  helper-dialect: mysql
-  reasonable: true
-  support-methods-arguments: true
-  params: count=countSql
+mica:
+  xss:
+    enabled: true
+    path-patterns: /**

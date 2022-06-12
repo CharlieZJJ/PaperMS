@@ -8,6 +8,7 @@ import com.database.paperms.entity.type.IEnum;
  * Date: 2022-05-04 22:47
  */
 public enum Permission implements IEnum {
+    ROOt(2, "root"),
     ADMIN(1, "管理员"),
     USER(0, "用户");
 

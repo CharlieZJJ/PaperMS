@@ -2,7 +2,6 @@ package com.database.paperms.controller;
 
 import com.database.paperms.entity.Comment;
 import com.database.paperms.entity.Paper;
-import com.database.paperms.entity.ResearchDirection;
 import com.database.paperms.entity.vo.AdvancedSearchValue;
 import com.database.paperms.entity.vo.PageHelper;
 import com.database.paperms.entity.vo.PaperVO;

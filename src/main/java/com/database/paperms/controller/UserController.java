@@ -122,5 +122,11 @@ public class UserController {
         return ResultData.success(list);
     }
 
+//    @GetMapping("/statistics")
+//    public ResultData statistics(){
+//        Integer userId = (Integer) session.getAttribute("user_id");
+//    }
+
+
 
 }

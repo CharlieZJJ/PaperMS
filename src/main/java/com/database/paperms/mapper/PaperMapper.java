@@ -14,13 +14,13 @@ public interface PaperMapper {
 
     int insertPaper(Paper paper);
 
-    int insertPaperRd(Integer paperId,String rdId);
+    int insertPaperRd(Integer paperId, String rdId);
 
-    int insertPaperAuthor(Integer paperId,String authorName);
+    int insertPaperAuthor(Integer paperId, String authorName);
 
-    int insertPaperCitation(Integer paperId,Integer citationId);
+    int insertPaperCitation(Integer paperId, Integer citationId);
 
-    int insertPaperAdditionalFile(Integer paperId, String filePath,String fileName,Double fileSize);
+    int insertPaperAdditionalFile(Integer paperId, String filePath, String fileName, Double fileSize);
 
     Paper getPaper(Integer paperId);
 

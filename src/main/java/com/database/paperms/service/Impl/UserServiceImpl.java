@@ -1,6 +1,7 @@
 package com.database.paperms.service.Impl;
 
 import com.database.paperms.entity.User;
+import com.database.paperms.entity.vo.PageHelper;
 import com.database.paperms.mapper.UserMapper;
 import com.database.paperms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * ClassName: com.database.paperms.service.Impl.UserServiceImpl
@@ -43,5 +45,25 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean accountExist(String account) {
         return userMapper.testAccount(account) != null;
+    }
+
+    @Override
+    public boolean upgrade(Integer userId) {
+        return userMapper.upgrade(userId) == 1;
+    }
+
+    @Override
+    public boolean delete(Integer userId) {
+        return userMapper.delete(userId) == 1;
+    }
+
+    @Override
+    public PageHelper<User> list(int pageSize, int pageNo) {
+        List<User> list = userMapper.list((pageNo - 1) * pageSize, pageSize);
+        PageHelper<User> userPageHelper = new PageHelper<>(list);
+        userPageHelper.setTotal(userMapper.count());
+        userPageHelper.setPageSize(pageSize);
+        userPageHelper.setPageNo(pageNo);
+        return userPageHelper;
     }
 }
