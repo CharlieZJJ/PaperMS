@@ -50,6 +50,30 @@
         where paper_id = #{paperId}
     </delete>
 
+    <delete id="deletePaperRd">
+        delete
+        from paper_rd
+        where paper_id = #{paperId}
+    </delete>
+
+    <delete id="deletePaperAuthor">
+        delete
+        from paper_author
+        where paper_id = #{paperId}
+    </delete>
+
+    <delete id="deletePaperCitation">
+        delete
+        from paper_citation
+        where paper_id = #{paperId}
+    </delete>
+
+    <delete id="deletePaperAdditionalFile">
+        delete
+        from paper_additional_file
+        where paper_id = #{paperId}
+    </delete>
+
     <update id="updatePaper" parameterType="com.database.paperms.entity.Paper">
         update paper
         set paper_title=#{paperTitle},

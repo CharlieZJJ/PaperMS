@@ -69,6 +69,10 @@ public class PaperServicelmpl implements PaperService {
 
     @Override
     public int deletePaper(Integer paperId) {
+        paperMapper.deletePaperRd(paperId);
+        paperMapper.deletePaperAuthor(paperId);
+        paperMapper.deletePaperCitation(paperId);
+        paperMapper.deletePaperAdditionalFile(paperId);
         return paperMapper.deletePaper(paperId);
     }
 

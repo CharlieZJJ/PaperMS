@@ -6,6 +6,7 @@ import com.database.paperms.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -17,6 +18,8 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public int saveComment(Comment comment) {
+        Date commentTime = new Date();
+        comment.setCommentDate(commentTime);
         return commentMapper.insertComment(comment);
     }
 
@@ -24,6 +27,9 @@ public class CommentServiceImpl implements CommentService {
     public int deleteComment(Integer commentId) {
         return commentMapper.deleteComment(commentId);
     }
+
+    @Override
+    public int removeComment(Integer commentId){return commentMapper.removeComment(commentId);}
 
     @Override
     public Comment getComment(Integer commentId) {

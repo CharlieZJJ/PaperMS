@@ -16,6 +16,12 @@
         where comment_id = #{commentId}
     </delete>
 
+    <update id="removeComment" parameterType="com.database.paperms.entity.Comment">
+        update comment
+        set comment_content="此评论已经被删除！"
+        where comment_id = #{commentId}
+    </update>
+
     <select id="getComment" resultType="com.database.paperms.entity.Comment">
         select *
         from comment

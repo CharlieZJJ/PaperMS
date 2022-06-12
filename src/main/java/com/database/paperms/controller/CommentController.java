@@ -9,6 +9,7 @@ import com.database.paperms.service.ReplyService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -19,8 +20,13 @@ public class CommentController {
     @Resource
     private ReplyService replyService;
 
+    @Resource
+    private HttpSession session;
+
     @PostMapping("/add")
     public ResultData add(@RequestBody Comment comment) {
+        Integer commentId = (Integer) session.getAttribute("user_id");
+        comment.setCommentUserId(commentId);
         commentService.saveComment(comment);
         return ResultData.success();
     }
@@ -39,4 +45,11 @@ public class CommentController {
             return ResultData.fail(ReturnCode.NOT_EXISTENT_COMMENT);
         }
     }
+
+    @PostMapping("/remove/{id}")
+    public ResultData remove(@PathVariable("id") Integer commentId) {
+        commentService.removeComment(commentId);
+        return ResultData.success();
+    }
+
 }

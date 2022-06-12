@@ -28,6 +28,14 @@ public interface PaperMapper {
 
     int deletePaper(Integer paperId);
 
+    int deletePaperRd(Integer paperId);
+
+    int deletePaperAuthor(Integer paperId);
+
+    int deletePaperCitation(Integer paperId);
+
+    int deletePaperAdditionalFile(Integer paperId);
+
     int updatePaper(Paper paper);
 
     List<Paper> list(String type, String cond, int sort);
