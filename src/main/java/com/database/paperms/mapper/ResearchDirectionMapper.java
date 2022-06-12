@@ -18,4 +18,5 @@ public interface ResearchDirectionMapper {
 
     List<ResearchDirection> list();
 
+
 }
