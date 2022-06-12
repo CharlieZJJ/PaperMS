@@ -1,6 +1,8 @@
 package com.database.paperms.service.Impl;
 
+import com.database.paperms.entity.FileEntity;
 import com.database.paperms.entity.Paper;
+import com.database.paperms.entity.ResearchDirection;
 import com.database.paperms.entity.vo.AdvancedSearchValue;
 import com.database.paperms.entity.vo.PageHelper;
 import com.database.paperms.entity.vo.PaperVO;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,7 +27,34 @@ public class PaperServicelmpl implements PaperService {
 
     @Override
     public int savePaper(Paper paper) {
-        return paperMapper.insertPaper(paper);
+        Date publishTime = new Date();
+        paper.setPaperPublishTime(publishTime);
+        paperMapper.insertPaper(paper);
+        Integer paperId = paper.getPaperId();
+        List<String> rdlist = paper.getPaperRd();
+        List<String> authorlist = paper.getPaperAuthor();
+        List<Integer> citationlist = paper.getPaperCitation();
+        List<FileEntity> fileList = paper.getPaperAdditionalFile();
+        for(int i=0;i<rdlist.size();i++){
+            String rdId = rdlist.get(i);
+            paperMapper.insertPaperRd(paperId,rdId);
+        }
+        for(int i=0;i<authorlist.size();i++){
+            String authorName = authorlist.get(i);
+            paperMapper.insertPaperAuthor(paperId,authorName);
+        }
+        for(int i=0;i<citationlist.size();i++){
+            Integer citationId = citationlist.get(i);
+            paperMapper.insertPaperCitation(paperId,citationId);
+        }
+        for(int i=0;i<fileList.size();i++){
+            FileEntity file = fileList.get(i);
+            String filePath = file.getPath();
+            String fileName = file.getFileName();
+            Double fileSize = file.getFileSize();
+            paperMapper.insertPaperAdditionalFile(paperId,filePath,fileName,fileSize);
+        }
+        return 1;
     }
 
     @Override

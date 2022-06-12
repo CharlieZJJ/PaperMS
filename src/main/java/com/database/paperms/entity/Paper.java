@@ -25,7 +25,7 @@ public class Paper implements Serializable {
     private PaperType paperType;
     private Integer paperPublisherId;
     private Date paperPublishTime; //数据库中为Datetime
-    private List<String> paperAdditionalFile;
+    private List<FileEntity> paperAdditionalFile;
     private List<String> paperAuthor;
     private List<Integer> paperCitation;
     private List<String> paperRd;
@@ -33,7 +33,7 @@ public class Paper implements Serializable {
     public Paper() {
     }
 
-    public Paper(Integer paperId, String paperTitle, String paperMeeting, Date paperDate, String paperSummary, String paperLink, PaperType paperType, Integer paperPublisherId, Date paperPublishTime, List<String> paperAdditionalFile, List<String> paperAuthor, List<Integer> paperCitation, List<String> paperRd) {
+    public Paper(Integer paperId, String paperTitle, String paperMeeting, Date paperDate, String paperSummary, String paperLink, PaperType paperType, Integer paperPublisherId, Date paperPublishTime, List<FileEntity> paperAdditionalFile, List<String> paperAuthor, List<Integer> paperCitation, List<String> paperRd) {
         this.paperId = paperId;
         this.paperTitle = paperTitle;
         this.paperMeeting = paperMeeting;
@@ -121,11 +121,11 @@ public class Paper implements Serializable {
         this.paperPublishTime = paperPublishTime;
     }
 
-    public List<String> getPaperAdditionalFile() {
+    public List<FileEntity> getPaperAdditionalFile() {
         return paperAdditionalFile;
     }
 
-    public void setPaperAdditionalFile(List<String> paperAdditionalFile) {
+    public void setPaperAdditionalFile(List<FileEntity> paperAdditionalFile) {
         this.paperAdditionalFile = paperAdditionalFile;
     }
 

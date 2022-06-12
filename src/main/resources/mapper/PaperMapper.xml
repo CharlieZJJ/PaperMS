@@ -12,6 +12,26 @@
                 #{paperPublisherId}, #{paperPublishTime})
     </insert>
 
+    <insert id="insertPaperRd">
+        insert into paper_rd(paper_id, rd_id)
+        values (#{paperId}, #{rdId})
+    </insert>
+
+    <insert id="insertPaperAuthor">
+        insert into paper_author(paper_id, author_name)
+        values (#{paperId}, #{authorName})
+    </insert>
+
+    <insert id="insertPaperCitation">
+        insert into paper_citation(paper_id, citation_id)
+        values (#{paperId}, #{citationId})
+    </insert>
+
+    <insert id="insertPaperAdditionalFile" parameterType="com.database.paperms.entity.Paper">
+        insert into paper_additional_file(paper_id, file_path ,file_name, file_size)
+        values (#{paperId}, #{filePath}, #{fileName}, #{fileSize})
+    </insert>
+
     <select id="getPaper" resultType="com.database.paperms.entity.Paper">
         select *
         from paper

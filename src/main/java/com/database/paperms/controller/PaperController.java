@@ -2,6 +2,7 @@ package com.database.paperms.controller;
 
 import com.database.paperms.entity.Comment;
 import com.database.paperms.entity.Paper;
+import com.database.paperms.entity.ResearchDirection;
 import com.database.paperms.entity.vo.AdvancedSearchValue;
 import com.database.paperms.entity.vo.PageHelper;
 import com.database.paperms.entity.vo.PaperVO;
@@ -13,6 +14,7 @@ import com.database.paperms.utils.CopyUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,9 +33,14 @@ public class PaperController {
     @Resource
     private CopyUtil copyUtil;
 
+    @Resource
+    private HttpSession session;
+
     @PostMapping("/add")
     public ResultData add(@RequestBody Paper paper) {
         if (paperService.getByLink(paper.getPaperLink()) == null) {
+            Integer publisherId = (Integer) session.getAttribute("user_id");
+            paper.setPaperPublisherId(publisherId);
             paperService.savePaper(paper);
             return ResultData.success();
         } else {

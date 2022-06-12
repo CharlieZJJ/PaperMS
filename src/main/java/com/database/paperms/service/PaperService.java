@@ -1,6 +1,7 @@
 package com.database.paperms.service;
 
 import com.database.paperms.entity.Paper;
+import com.database.paperms.entity.ResearchDirection;
 import com.database.paperms.entity.vo.AdvancedSearchValue;
 import com.database.paperms.entity.vo.PageHelper;
 import com.database.paperms.entity.vo.PaperVO;
