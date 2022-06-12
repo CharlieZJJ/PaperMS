@@ -25,6 +25,9 @@ public class ReplyServiceImpl implements ReplyService {
     }
 
     @Override
+    public int updateReply(Reply reply){return replyMapper.updateReply(reply);}
+
+    @Override
     public Reply getReply(Integer replyId) {
         return replyMapper.getReply(replyId);
     }

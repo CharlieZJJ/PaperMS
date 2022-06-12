@@ -16,6 +16,12 @@
         where reply_id = #{replyId}
     </delete>
 
+    <update id="updateReply" parameterType="com.database.paperms.entity.Reply">
+        update reply
+        set reply_content= #{replyContent}
+        where reply_id = #{replyId}
+    </update>
+
     <select id="getReply" resultType="com.database.paperms.entity.Reply">
         select *
         from reply

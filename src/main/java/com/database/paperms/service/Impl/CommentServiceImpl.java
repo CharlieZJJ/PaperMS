@@ -32,6 +32,13 @@ public class CommentServiceImpl implements CommentService {
     public int removeComment(Integer commentId){return commentMapper.removeComment(commentId);}
 
     @Override
+    public int updateComment(Comment comment){
+        Date commentTime = new Date();
+        comment.setCommentDate(commentTime);
+        return commentMapper.updateComment(comment);
+    }
+
+    @Override
     public Comment getComment(Integer commentId) {
         return commentMapper.getComment(commentId);
     }

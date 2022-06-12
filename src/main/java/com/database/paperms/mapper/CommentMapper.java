@@ -14,6 +14,8 @@ public interface CommentMapper {
 
     int removeComment(Integer commentId);
 
+    int updateComment(Comment comment);
+
     Comment getComment(Integer commentId);
 
     List<Comment> getByPaperId(Integer paper_id);

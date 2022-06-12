@@ -11,6 +11,8 @@ public interface ReplyService {
 
     int deleteReply(Integer replyId);
 
+    int updateReply(Reply reply);
+
     Reply getReply(Integer replyId);
 
     List<Reply> getByCommentId(Integer commentId);

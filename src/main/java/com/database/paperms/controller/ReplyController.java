@@ -1,5 +1,6 @@
 package com.database.paperms.controller;
 
+import com.database.paperms.entity.Comment;
 import com.database.paperms.entity.Reply;
 import com.database.paperms.response.ResultData;
 import com.database.paperms.response.ReturnCode;
@@ -28,6 +29,16 @@ public class ReplyController {
             return ResultData.success();
         } else {
             return ResultData.fail(ReturnCode.NOT_EXISTENT_REPLY);
+        }
+    }
+
+    @PostMapping("/update")
+    public ResultData update(@RequestBody Reply reply) {
+        if (replyService.getReply(reply.getReplyId()) != null) {
+            replyService.updateReply(reply);
+            return ResultData.success();
+        } else {
+            return ResultData.fail(ReturnCode.NOT_EXISTENT_COMMENT);
         }
     }
 }

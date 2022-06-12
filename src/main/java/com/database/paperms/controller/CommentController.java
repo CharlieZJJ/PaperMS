@@ -48,8 +48,21 @@ public class CommentController {
 
     @PostMapping("/remove/{id}")
     public ResultData remove(@PathVariable("id") Integer commentId) {
-        commentService.removeComment(commentId);
-        return ResultData.success();
+        if (commentService.getComment(commentId) != null) {
+            commentService.removeComment(commentId);
+            return ResultData.success();
+        } else {
+            return ResultData.fail(ReturnCode.NOT_EXISTENT_COMMENT);
+        }
     }
 
+    @PostMapping("/update")
+    public ResultData update(@RequestBody Comment comment) {
+        if (commentService.getComment(comment.getCommentId()) != null) {
+            commentService.updateComment(comment);
+            return ResultData.success();
+        } else {
+            return ResultData.fail(ReturnCode.NOT_EXISTENT_COMMENT);
+        }
+    }
 }
