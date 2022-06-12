@@ -13,6 +13,6 @@ public interface ResearchDirectionService {
 
     int updateResearchDirection(ResearchDirection researchDirection);
 
-    List<TreeNode<ResearchDirection>> list();
+    List<TreeNode> list();
 
 }

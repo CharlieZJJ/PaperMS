@@ -2,40 +2,45 @@ package com.database.paperms.utils;
 
 import java.util.List;
 
-public class TreeNode<T> {
-    T data;
-    List<TreeNode<T>> children;
+public class TreeNode {
+    String label;
+    String value;
+    List<TreeNode> children;
 
-    public TreeNode(T data, List<TreeNode<T>> children) {
-        this.data = data;
+    public TreeNode(String label, String value, List<TreeNode> children) {
+        this.label = label;
+        this.value = value;
         this.children = children;
-    }
-
-    public TreeNode(T data) {
-        this.data = data;
     }
 
     public TreeNode() {
     }
 
-    public void insert(TreeNode<T> node) throws NullPointerException {
-        children.add(node);
+    public String getLabel() {
+        return label;
     }
 
-
-    public T getData() {
-        return data;
+    public void setLabel(String label) {
+        this.label = label;
     }
 
-    public void setData(T data) {
-        this.data = data;
+    public String getValue() {
+        return value;
     }
 
-    public List<TreeNode<T>> getChildren() {
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public List<TreeNode> getChildren() {
         return children;
     }
 
-    public void setChildren(List<TreeNode<T>> children) {
+    public void setChildren(List<TreeNode> children) {
         this.children = children;
+    }
+
+    public void insert(TreeNode treeNode){
+        this.children.add(treeNode);
     }
 }
