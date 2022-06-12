@@ -32,6 +32,12 @@
         where user_account = #{account}
     </select>
 
+    <select id="getIdByAccount" resultType="java.lang.Integer">
+        select user_id
+        from user
+        where user_account = #{account}
+    </select>
+
     <select id="testAccount" resultType="int">
         select 1
         from user

@@ -20,6 +20,8 @@ public interface UserMapper {
 
     User getByAccount(String account);
 
+    Integer getIdByAccount(String account);
+
     Integer testAccount(String userAccount);
 
     UserVO getUserById(Integer userId);

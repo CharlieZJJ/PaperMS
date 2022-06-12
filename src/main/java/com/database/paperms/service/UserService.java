@@ -11,6 +11,8 @@ import com.database.paperms.entity.vo.PageHelper;
 public interface UserService {
     User getUserById(int id);
 
+    Integer getIdByAccount(String account);
+
     int save(User user);
 
     User login(String userAccount);

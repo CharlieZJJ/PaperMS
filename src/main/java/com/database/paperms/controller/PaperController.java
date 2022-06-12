@@ -9,6 +9,7 @@ import com.database.paperms.response.ResultData;
 import com.database.paperms.response.ReturnCode;
 import com.database.paperms.service.CommentService;
 import com.database.paperms.service.PaperService;
+import com.database.paperms.service.UserService;
 import com.database.paperms.utils.CopyUtil;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +28,9 @@ public class PaperController {
     private CommentService commentService;
 
     @Resource
+    private UserService userService;
+
+    @Resource
     private CommentController commentController;
 
     @Resource
@@ -36,9 +40,9 @@ public class PaperController {
     private HttpSession session;
 
     @PostMapping("/add")
-    public ResultData add(@RequestBody Paper paper) {
+    public ResultData add(@RequestBody Paper paper,@RequestParam String userAccount) {
         if (paperService.getByLink(paper.getPaperLink()) == null) {
-            Integer publisherId = (Integer) session.getAttribute("user_id");
+            Integer publisherId = userService.getIdByAccount(userAccount);
             paper.setPaperPublisherId(publisherId);
             paperService.savePaper(paper);
             return ResultData.success();

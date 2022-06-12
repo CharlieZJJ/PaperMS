@@ -31,6 +31,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Integer getIdByAccount(String account){return userMapper.getIdByAccount(account);}
+
+    @Override
     public int save(User user) {
         user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
         return userMapper.insertUser(user);
