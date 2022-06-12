@@ -14,9 +14,14 @@ import java.util.Objects;
 @Service
 public class ResearchDirectionServiceImpl implements ResearchDirectionService {
 
-
     @Resource
     private ResearchDirectionMapper rdMapper;
+    @Override
+    public int saveResearchDirection(ResearchDirection researchDirection){return rdMapper.insertResearchDirection(researchDirection);}
+    @Override
+    public int deleteResearchDirection(Integer rdId){return rdMapper.deleteResearchDirection(rdId);}
+    @Override
+    public int updateResearchDirection(ResearchDirection researchDirection){return rdMapper.updateResearchDirection(researchDirection);}
 
     @Override
     public List<TreeNode<ResearchDirection>> list() throws NullPointerException {

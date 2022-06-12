@@ -5,6 +5,23 @@
 
 <mapper namespace="com.database.paperms.mapper.ResearchDirectionMapper">
 
+    <insert id="insertResearchDirection" useGeneratedKeys="true" keyProperty="rdId">
+        insert into research_direction(rd_id, rd_name)
+        values (#{rdId}, #{rdName})
+    </insert>
+
+    <delete id="deleteResearchDirection">
+        delete
+        from research_direction
+        where rd_id = #{rdId}
+    </delete>
+
+    <update id="updateResearchDirection" parameterType="com.database.paperms.entity.ResearchDirection">
+        update research_direction
+        set rd_name=#{rdName}
+        where rd_id = #{rdId}
+    </update>
+
     <select id="list" resultType="com.database.paperms.entity.ResearchDirection">
         select rd_id, rd_name
         from research_direction

@@ -1,17 +1,17 @@
 package com.database.paperms.controller;
 
 
+import com.database.paperms.entity.Paper;
+import com.database.paperms.entity.Reply;
 import com.database.paperms.entity.ResearchDirection;
 import com.database.paperms.entity.vo.PageHelper;
 import com.database.paperms.entity.vo.PaperVO;
 import com.database.paperms.response.ResultData;
+import com.database.paperms.response.ReturnCode;
 import com.database.paperms.service.PaperService;
 import com.database.paperms.service.ResearchDirectionService;
 import com.database.paperms.utils.TreeNode;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -25,6 +25,24 @@ public class ResearchDirectionController {
 
     @Resource
     private PaperService paperService;
+
+    @PostMapping("/add")
+    public ResultData add(@RequestBody ResearchDirection researchDirection) {
+        rdService.saveResearchDirection(researchDirection);
+        return ResultData.success();
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResultData delete(@PathVariable("id") Integer rdId) {
+        rdService.deleteResearchDirection(rdId);
+        return ResultData.success();
+    }
+
+    @PostMapping("/update")
+    public ResultData update(@RequestBody ResearchDirection researchDirection) {
+        rdService.updateResearchDirection(researchDirection);
+        return ResultData.success();
+    }
 
     @GetMapping("/list")
     public ResultData list() {
