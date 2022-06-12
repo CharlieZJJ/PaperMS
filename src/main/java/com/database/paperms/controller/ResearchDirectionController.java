@@ -43,7 +43,7 @@ public class ResearchDirectionController {
 
     @GetMapping("/list")
     public ResultData list() {
-        List<TreeNode<ResearchDirection>> list = null;
+        List<TreeNode> list = null;
         try {
             list = rdService.list();
         } catch (NullPointerException e) {

@@ -33,25 +33,25 @@ public class ResearchDirectionServiceImpl implements ResearchDirectionService {
     }
 
     @Override
-    public List<TreeNode<ResearchDirection>> list() throws NullPointerException {
+    public List<TreeNode> list() throws NullPointerException {
         List<ResearchDirection> list = rdMapper.list();
-        List<TreeNode<ResearchDirection>> lists = new ArrayList<>();
-        TreeNode<ResearchDirection> root = null;
-        TreeNode<ResearchDirection> tree = null;
-        TreeNode<ResearchDirection> leaf;
+        List<TreeNode> lists = new ArrayList<>();
+        TreeNode root = null;
+        TreeNode tree = null;
+        TreeNode leaf;
         try {
             for (ResearchDirection rd : list) {
                 switch (rd.getRdId().length()) {
                     case 2:
-                        root = new TreeNode<>(rd, new ArrayList<>());
+                        root = new TreeNode(rd.getRdName(), rd.getRdId(), new ArrayList<>());
                         lists.add(root);
                         break;
                     case 4:
-                        tree = new TreeNode<>(rd, new ArrayList<>());
+                        tree = new TreeNode(rd.getRdName(), rd.getRdId(), new ArrayList<>());
                         Objects.requireNonNull(root).insert(tree);
                         break;
                     case 6:
-                        leaf = new TreeNode<>(rd, null);
+                        leaf = new TreeNode(rd.getRdName(), rd.getRdId(), null);
                         Objects.requireNonNull(tree).insert(leaf);
                         break;
                 }
