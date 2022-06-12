@@ -5,12 +5,16 @@ import com.database.paperms.entity.vo.AdvancedSearchValue;
 import com.database.paperms.entity.vo.PageHelper;
 import com.database.paperms.entity.vo.PaperVO;
 
+import java.util.List;
+
 public interface PaperService {
     int savePaper(Paper paper);
 
     Paper getPaper(Integer paperId);
 
     Paper getByLink(String paperLink);
+
+    Integer getCitationIdByLink(String citationLink);
 
     int deletePaper(Integer paperId);
 

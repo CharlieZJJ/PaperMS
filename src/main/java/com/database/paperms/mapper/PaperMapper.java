@@ -24,6 +24,8 @@ public interface PaperMapper {
 
     Paper getPaper(Integer paperId);
 
+    Integer getCitationIdByLink(String citationLink);
+
     Paper getByLink(String paperLink);
 
     int deletePaper(Integer paperId);

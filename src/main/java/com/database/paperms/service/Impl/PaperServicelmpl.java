@@ -67,6 +67,9 @@ public class PaperServicelmpl implements PaperService {
     }
 
     @Override
+    public Integer getCitationIdByLink(String citationLink){return paperMapper.getCitationIdByLink(citationLink);}
+
+    @Override
     public int deletePaper(Integer paperId) {
         paperMapper.deletePaperRd(paperId);
         paperMapper.deletePaperAuthor(paperId);
