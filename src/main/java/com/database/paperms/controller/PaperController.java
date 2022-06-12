@@ -59,21 +59,6 @@ public class PaperController {
         return ResultData.success(idList);
     }
 
-//    @PostMapping("/add/getId")
-//    public ResultData getCitationIdByLink(@RequestBody List<String> citationLink){
-//        List<Integer> idList=new ArrayList<>();
-//        for(int i=0;i<citationLink.size();i++){
-//            if(paperService.getCitationIdByLink(citationLink.get(i)) == null){
-//                return ResultData.fail(ReturnCode.NOT_EXISTENT_PAPER_ID);
-//            }else {
-//                Integer id = paperService.getCitationIdByLink(citationLink.get(i));
-//                idList.add(id);
-//            }
-//        }
-//        session.setAttribute("id_list", idList);
-//        return ResultData.success();
-//    }
-
     @DeleteMapping("/delete/{id}")
     public ResultData delete(@PathVariable("id") Integer paperId) {
         if (paperService.getPaper(paperId) != null) {
