@@ -40,4 +40,17 @@
         where paper_id = #{paperId}
     </select>
 
+    <select id="listComment" resultType="com.database.paperms.entity.Comment">
+        select *
+        from comment
+        where paper_id = #{paperId}
+            limit #{offset}, #{pageSize};
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from comment
+        where paper_id = #{paperId}
+    </select>
+
 </mapper>

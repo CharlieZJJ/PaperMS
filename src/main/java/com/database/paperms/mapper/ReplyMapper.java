@@ -1,6 +1,7 @@
 package com.database.paperms.mapper;
 
 import com.database.paperms.entity.Reply;
+import com.database.paperms.entity.UserNote;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -15,6 +16,10 @@ public interface ReplyMapper {
 
     Reply getReply(Integer replyId);
 
-    List<Reply> getByCommentId(Integer comment_id);
+    List<Reply> getByCommentId(Integer commentId);
+
+    List<Reply> listReply (Integer commentId, int offset, int pageSize);
+
+    int count();
 
 }

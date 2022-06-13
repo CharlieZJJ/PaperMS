@@ -1,7 +1,9 @@
 package com.database.paperms.controller;
 
 import com.database.paperms.entity.Reply;
+import com.database.paperms.entity.User;
 import com.database.paperms.entity.UserNote;
+import com.database.paperms.entity.vo.PageHelper;
 import com.database.paperms.response.ResultData;
 import com.database.paperms.response.ReturnCode;
 import com.database.paperms.service.UserNoteService;
@@ -45,4 +47,11 @@ public class UserNoteController {
             return ResultData.fail(ReturnCode.NOT_EXISTENT_USER_NOTE);
         }
     }
+
+    @PutMapping("/list")
+    public ResultData list(@RequestParam Integer noteUserId,@RequestParam int pageSize, @RequestParam int pageNo) {
+        PageHelper<UserNote> list = userNoteService.listUserNote(noteUserId,pageSize, pageNo);
+        return ResultData.success(list);
+    }
+
 }

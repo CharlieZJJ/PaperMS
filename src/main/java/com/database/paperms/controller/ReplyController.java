@@ -2,6 +2,7 @@ package com.database.paperms.controller;
 
 import com.database.paperms.entity.Comment;
 import com.database.paperms.entity.Reply;
+import com.database.paperms.entity.vo.PageHelper;
 import com.database.paperms.response.ResultData;
 import com.database.paperms.response.ReturnCode;
 import com.database.paperms.service.ReplyService;
@@ -41,4 +42,11 @@ public class ReplyController {
             return ResultData.fail(ReturnCode.NOT_EXISTENT_COMMENT);
         }
     }
+
+    @PutMapping("/list")
+    public ResultData list(@RequestParam Integer commentId,@RequestParam int pageSize, @RequestParam int pageNo) {
+        PageHelper<Reply> list = replyService.listReply(commentId,pageSize, pageNo);
+        return ResultData.success(list);
+    }
+
 }

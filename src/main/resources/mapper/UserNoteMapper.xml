@@ -28,5 +28,16 @@
         where note_paper_id = #{notePaperId} and note_user_id = #{noteUserId}
     </update>
 
+    <select id="listUserNote" resultType="com.database.paperms.entity.UserNote">
+        select *
+        from user_note
+        where note_user_id = #{noteUserId}
+        limit #{offset}, #{pageSize}
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from user_note
+    </select>
 
 </mapper>

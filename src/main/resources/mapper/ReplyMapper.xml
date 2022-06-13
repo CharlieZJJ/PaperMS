@@ -34,4 +34,16 @@
         where comment_id = #{commentId}
     </select>
 
+    <select id="listReply" resultType="com.database.paperms.entity.Reply">
+        select *
+        from reply
+        where comment_id = #{commentId} limit #{offset},#{pageSize}
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from reply
+        where comment_id = #{commentId}
+    </select>
+
 </mapper>
