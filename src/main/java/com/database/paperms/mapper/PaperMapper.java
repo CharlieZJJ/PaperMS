@@ -60,13 +60,12 @@ public interface PaperMapper {
 
     List<Paper> getPaperByAccount(String account, int sort);
 
-    List<Paper> getByRd(String rd);
+    List<Paper> getByRd(String rdId);
 
     int countByUserId(int userId);
 
     int countByUserIdWithRange(Date lowerBound, Integer userId);
 
-    @MapKey("rd_name")
     List<rdCount> countRd(Integer userId);
 
 }

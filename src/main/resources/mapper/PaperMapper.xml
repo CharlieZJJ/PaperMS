@@ -301,7 +301,7 @@
         from paper p
                  inner join paper_rd pr on p.paper_id = pr.paper_id
                  inner join research_direction rd on pr.rd_id = rd.rd_id
-        where rd_name like concat('%', #{rd}, '%')
+        where pr.rd_id = #{rdId}
     </select>
     <select id="countByUserId" resultType="java.lang.Integer">
         select count(0)

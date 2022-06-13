@@ -5,6 +5,7 @@ import com.database.paperms.entity.ResearchDirection;
 import com.database.paperms.entity.vo.PageHelper;
 import com.database.paperms.entity.vo.PaperVO;
 import com.database.paperms.response.ResultData;
+import com.database.paperms.response.ReturnCode;
 import com.database.paperms.service.PaperService;
 import com.database.paperms.service.ResearchDirectionService;
 import com.database.paperms.utils.TreeNode;
@@ -54,9 +55,12 @@ public class ResearchDirectionController {
         return ResultData.success(list);
     }
 
-    @GetMapping("/find")
-    public ResultData find(@RequestParam String name, @RequestParam int pageSize, @RequestParam int pageNo) {
-        PageHelper<PaperVO> byRd = paperService.getByRd(pageSize, pageNo, name);
+    @PostMapping("/find")
+    public ResultData find(@RequestBody List<String> name, @RequestParam int pageSize, @RequestParam int pageNo) {
+        int size = name.size();
+        if(size == 0)
+            return ResultData.fail(ReturnCode.RESEARCH_DIRECTION_IS_EMPTY);
+        PageHelper<PaperVO> byRd = paperService.getByRd(pageSize, pageNo, name.get(name.size() - 1));
         return ResultData.success(byRd);
     }
 
