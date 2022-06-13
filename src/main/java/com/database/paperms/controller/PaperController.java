@@ -3,6 +3,7 @@ package com.database.paperms.controller;
 import com.database.paperms.entity.Comment;
 import com.database.paperms.entity.Paper;
 import com.database.paperms.entity.vo.AdvancedSearchValue;
+import com.database.paperms.entity.vo.CitationLinkVO;
 import com.database.paperms.entity.vo.PageHelper;
 import com.database.paperms.entity.vo.PaperVO;
 import com.database.paperms.response.ResultData;
@@ -39,6 +40,7 @@ public class PaperController {
     @Resource
     private HttpSession session;
 
+
     @PostMapping("/add")
     public ResultData add(@RequestBody Paper paper,@RequestParam String userAccount) {
         if (paperService.getByLink(paper.getPaperLink()) == null) {
@@ -52,11 +54,11 @@ public class PaperController {
     }
 
     @PostMapping("/add/getId")
-    public ResultData getCitationIdByLink(@RequestBody List<String> citationLink){
+    public ResultData getCitationIdByLink(@RequestBody List<CitationLinkVO> citationLink){
         List<Integer> idList=new ArrayList<>();
         for(int i=0;i<citationLink.size();i++){
-            if(paperService.getCitationIdByLink(citationLink.get(i)) != null) {
-                Integer id = paperService.getCitationIdByLink(citationLink.get(i));
+            if(paperService.getCitationIdByLink(citationLink.get(i).getValue()) != null) {
+                Integer id = paperService.getCitationIdByLink(citationLink.get(i).getValue());
                 idList.add(id);
             }
         }
