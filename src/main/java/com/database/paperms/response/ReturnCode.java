@@ -59,7 +59,9 @@ public enum ReturnCode {
     USED_PAPER_ID(1008, "此论文ID号已经被使用！"),
     NOT_EXISTENT_COMMENT(1009, "此评论不存在！"),
     USED_PAPER_LINK(1010, "该论文链接已经存在！"),
-    NOT_EXISTENT_REPLY(1011, "此回复不存在！");
+    NOT_EXISTENT_REPLY(1011, "此回复不存在！"),
+    NOT_EXISTENT_USER_NOTE(1012,"笔记不存在！"),
+    USED_USER_NOTE(1013,"笔记已经存在。");
     /**
      * 自定义状态码
      **/
