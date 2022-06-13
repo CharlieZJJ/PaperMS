@@ -61,7 +61,8 @@ public enum ReturnCode {
     USED_PAPER_LINK(1010, "该论文链接已经存在！"),
     NOT_EXISTENT_REPLY(1011, "此回复不存在！"),
     NOT_EXISTENT_USER_NOTE(1012,"笔记不存在！"),
-    USED_USER_NOTE(1013,"笔记已经存在。");
+    USED_USER_NOTE(1013,"笔记已经存在。"),
+    RESEARCH_DIRECTION_IS_EMPTY(1014,"研究方向为空");
     /**
      * 自定义状态码
      **/
