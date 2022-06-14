@@ -1,11 +1,9 @@
 package com.database.paperms.entity.dto;
 
 import com.database.paperms.entity.FileEntity;
-import com.database.paperms.entity.type.Impl.PaperType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.List;

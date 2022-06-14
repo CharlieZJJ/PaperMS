@@ -13,19 +13,22 @@
     <delete id="deleteUserNote">
         delete
         from user_note
-        where note_paper_id = #{notePaperId} and note_user_id = #{noteUserId}
+        where note_paper_id = #{notePaperId}
+          and note_user_id = #{noteUserId}
     </delete>
 
     <select id="getUserNote" resultType="com.database.paperms.entity.UserNote">
         select *
         from user_note
-        where note_paper_id = #{notePaperId} and note_user_id = #{noteUserId}
+        where note_paper_id = #{notePaperId}
+          and note_user_id = #{noteUserId}
     </select>
 
     <update id="updateUserNote" parameterType="com.database.paperms.entity.UserNote">
         update user_note
         set note_content= #{noteContent}
-        where note_paper_id = #{notePaperId} and note_user_id = #{noteUserId}
+        where note_paper_id = #{notePaperId}
+          and note_user_id = #{noteUserId}
     </update>
 
     <select id="listUserNote" resultType="com.database.paperms.entity.UserNote">

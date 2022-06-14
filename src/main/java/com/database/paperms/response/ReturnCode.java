@@ -60,11 +60,17 @@ public enum ReturnCode {
     NOT_EXISTENT_COMMENT(1009, "此评论不存在！"),
     USED_PAPER_LINK(1010, "该论文链接已经存在！"),
     NOT_EXISTENT_REPLY(1011, "此回复不存在！"),
-    NOT_EXISTENT_USER_NOTE(1012,"笔记不存在！"),
-    USED_USER_NOTE(1013,"笔记已经存在。"),
-    RESEARCH_DIRECTION_IS_EMPTY(1014,"研究方向为空"),
-    TIME_FORMAT_ERROR(1015,"时间格式错误，yyyy-MM-dd"),
-    PAPER_TYPE_RANGE_ERROR(1016,"论文类型错误");
+    NOT_EXISTENT_USER_NOTE(1012, "笔记不存在！"),
+    USED_USER_NOTE(1013, "笔记已经存在。"),
+    RESEARCH_DIRECTION_IS_EMPTY(1014, "研究方向为空"),
+    TIME_FORMAT_ERROR(1015, "时间格式错误，yyyy-MM-dd"),
+    PAPER_TYPE_RANGE_ERROR(1016, "论文类型错误"),
+    PAGE_PARAMETER_ERROR(1017, "分页参数错误"),
+    RESEARCH_DIRECTION_ERROR(1018, "研究方向数据出现问题，请维护"),
+    GET_DATA_ERROR(1019, "获取数据失败"),
+    ILLEGAL_SEARCH_TYPE(1020, "无效的搜索类型"),
+    SEARCH_CONDITION_ERROR(1021, "您的搜索条件有误，请检查！"),
+    UPDATE_ERROR(1022, "更新失败");
     /**
      * 自定义状态码
      **/

@@ -118,19 +118,18 @@ public class UserController {
         else
             sort = 0;
         if (pageSize <= 0 || pageNo <= 0)
-            return ResultData.fail(-1, "分页有关内容不能为负数");
+            return ResultData.fail(ReturnCode.PAGE_PARAMETER_ERROR);
         PageHelper<PaperVO> list = paperService.getByAccount(account, pageSize, pageNo, sort);
         return ResultData.success(list);
     }
 
     @GetMapping("/statistics")
-    public ResultData statistics(@RequestParam(defaultValue = "0")Integer timeRange){
-//        Integer user_id = (Integer) session.getAttribute("user_id");
-        int user_id = 1;
+    public ResultData statistics(@RequestParam(defaultValue = "0") Integer timeRange) {
+        Integer user_id = (Integer) session.getAttribute("user_id");
+//        int user_id = 1;
         Data count = paperService.count(timeRange, user_id);
         return ResultData.success(count);
     }
-
 
 
 }

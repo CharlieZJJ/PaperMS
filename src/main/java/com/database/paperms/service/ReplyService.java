@@ -2,7 +2,6 @@ package com.database.paperms.service;
 
 
 import com.database.paperms.entity.Reply;
-import com.database.paperms.entity.UserNote;
 import com.database.paperms.entity.vo.PageHelper;
 
 import java.util.List;
@@ -19,6 +18,6 @@ public interface ReplyService {
 
     List<Reply> getByCommentId(Integer commentId);
 
-    PageHelper<Reply> listReply (Integer commentId, int pageSize, int pageNo);
+    PageHelper<Reply> listReply(Integer commentId, int pageSize, int pageNo);
 
 }

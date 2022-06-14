@@ -40,7 +40,7 @@ public class TreeNode {
         this.children = children;
     }
 
-    public void insert(TreeNode treeNode){
+    public void insert(TreeNode treeNode) {
         this.children.add(treeNode);
     }
 }

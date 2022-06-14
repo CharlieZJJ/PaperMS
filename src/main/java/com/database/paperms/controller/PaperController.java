@@ -3,7 +3,6 @@ package com.database.paperms.controller;
 import com.database.paperms.entity.Comment;
 import com.database.paperms.entity.Paper;
 import com.database.paperms.entity.dto.PaperDTO;
-import com.database.paperms.entity.type.Impl.PaperType;
 import com.database.paperms.entity.vo.AdvancedSearchValue;
 import com.database.paperms.entity.vo.CitationLinkVO;
 import com.database.paperms.entity.vo.PageHelper;
@@ -12,9 +11,6 @@ import com.database.paperms.response.ResultData;
 import com.database.paperms.response.ReturnCode;
 import com.database.paperms.service.CommentService;
 import com.database.paperms.service.PaperService;
-import com.database.paperms.service.UserService;
-import com.database.paperms.utils.CopyUtil;
-import net.dreamlu.mica.xss.core.XssCleanIgnore;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -32,13 +28,7 @@ public class PaperController {
     private CommentService commentService;
 
     @Resource
-    private UserService userService;
-
-    @Resource
     private CommentController commentController;
-
-    @Resource
-    private CopyUtil copyUtil;
 
     @Resource
     private HttpSession session;
@@ -100,9 +90,9 @@ public class PaperController {
     @GetMapping("/list")
     public ResultData research(@RequestParam int pageSize, @RequestParam int pageNo, @RequestParam(required = false) String type, @RequestParam(required = false) String information, @RequestParam(defaultValue = "0") int sort) {
         if (!type.equals("title") && !type.equals("summary") && !type.equals("direction") && !type.equals("author") && type != null)
-            return ResultData.fail(-1, "无效的类型");
+            return ResultData.fail(ReturnCode.ILLEGAL_SEARCH_TYPE);
         if (pageSize <= 0 || pageNo <= 0)
-            return ResultData.fail(-1, "分页有关内容不能为负数");
+            return ResultData.fail(ReturnCode.PAGE_PARAMETER_ERROR);
         PageHelper<PaperVO> list = paperService.list(type, information, sort, pageSize, pageNo);
         return ResultData.success(list);
     }
@@ -110,7 +100,7 @@ public class PaperController {
     @PostMapping("/list/advanced")
     public ResultData advanced_research(@RequestBody AdvancedSearchValue value, @RequestParam int pageSize, @RequestParam int pageNo, @RequestParam(required = false, defaultValue = "0") int sort) {
         if (pageSize <= 0 || pageNo <= 0)
-            return ResultData.fail(-1, "分页有关内容不能为负数");
+            return ResultData.fail(ReturnCode.PAGE_PARAMETER_ERROR);
         ArrayList<Integer> paperTypeInts = new ArrayList<>();
         List<String> paperType = value.getPaperType();
         if (paperType.size() != 0) {
@@ -136,7 +126,7 @@ public class PaperController {
                         type = -1;
                         break;
                     default:
-                        return ResultData.fail(-1, "不合理的论文类型");
+                        return ResultData.fail(ReturnCode.PAPER_TYPE_RANGE_ERROR);
                 }
                 paperTypeInts.add(type);
             }
@@ -146,7 +136,7 @@ public class PaperController {
         try {
             list = paperService.advanced_list(value, pageSize, pageNo, sort);
         } catch (Exception e) {
-            return ResultData.fail(-1, "您的搜索条件有误，请检查！");
+            return ResultData.fail(ReturnCode.SEARCH_CONDITION_ERROR);
         }
         return ResultData.success(list);
     }

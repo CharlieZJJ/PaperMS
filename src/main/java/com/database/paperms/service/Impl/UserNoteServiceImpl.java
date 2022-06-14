@@ -1,6 +1,5 @@
 package com.database.paperms.service.Impl;
 
-import com.database.paperms.entity.User;
 import com.database.paperms.entity.UserNote;
 import com.database.paperms.entity.vo.PageHelper;
 import com.database.paperms.mapper.UserNoteMapper;
@@ -18,28 +17,32 @@ public class UserNoteServiceImpl implements UserNoteService {
     private UserNoteMapper userNoteMapper;
 
     @Override
-    public int insertUserNote(UserNote userNote){
+    public int insertUserNote(UserNote userNote) {
         Date updateTime = new Date();
         userNote.setNoteUpdateTime(updateTime);
         return userNoteMapper.insertUserNote(userNote);
     }
 
     @Override
-    public int deleteUserNote(Integer noteUserId,Integer notePaperId){return userNoteMapper.deleteUserNote(noteUserId,notePaperId);}
+    public int deleteUserNote(Integer noteUserId, Integer notePaperId) {
+        return userNoteMapper.deleteUserNote(noteUserId, notePaperId);
+    }
 
     @Override
-    public UserNote getUserNote(Integer noteUserId,Integer notePaperId){return userNoteMapper.getUserNote(noteUserId,notePaperId);}
+    public UserNote getUserNote(Integer noteUserId, Integer notePaperId) {
+        return userNoteMapper.getUserNote(noteUserId, notePaperId);
+    }
 
     @Override
-    public int updateUserNote(UserNote userNote){
+    public int updateUserNote(UserNote userNote) {
         Date updateTime = new Date();
         userNote.setNoteUpdateTime(updateTime);
         return userNoteMapper.updateUserNote(userNote);
     }
 
     @Override
-    public PageHelper<UserNote> listUserNote (Integer noteUserId, int pageSize, int pageNo){
-        List<UserNote> list = userNoteMapper.listUserNote(noteUserId,(pageNo - 1) * pageSize, pageSize);
+    public PageHelper<UserNote> listUserNote(Integer noteUserId, int pageSize, int pageNo) {
+        List<UserNote> list = userNoteMapper.listUserNote(noteUserId, (pageNo - 1) * pageSize, pageSize);
         PageHelper<UserNote> userPageHelper = new PageHelper<>(list);
         userPageHelper.setTotal(userNoteMapper.count());
         userPageHelper.setPageSize(pageSize);

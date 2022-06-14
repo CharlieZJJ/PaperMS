@@ -4,6 +4,7 @@ import com.database.paperms.entity.User;
 import com.database.paperms.entity.vo.Data;
 import com.database.paperms.entity.vo.PageHelper;
 import com.database.paperms.response.ResultData;
+import com.database.paperms.response.ReturnCode;
 import com.database.paperms.service.PaperService;
 import com.database.paperms.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -24,14 +25,14 @@ public class AdminUserController {
     public ResultData upgrade(@PathVariable int id) {
         if (userService.upgrade(id))
             return ResultData.success(id);
-        else return ResultData.fail(-1, "更新失败");
+        else return ResultData.fail(ReturnCode.UPDATE_ERROR);
     }
 
     @PutMapping("/delete/{id}")
     public ResultData delete(@PathVariable int id) {
         if (userService.delete(id))
             return ResultData.success(id);
-        else return ResultData.fail(-1, "更新失败");
+        else return ResultData.fail(ReturnCode.UPDATE_ERROR);
     }
 
     @PutMapping("/list")
@@ -41,7 +42,7 @@ public class AdminUserController {
     }
 
     @GetMapping("/statistics/{user_id}")
-    public ResultData statistics(@RequestParam(defaultValue = "0")Integer timeRange, @PathVariable Integer user_id){
+    public ResultData statistics(@RequestParam(defaultValue = "0") Integer timeRange, @PathVariable Integer user_id) {
         Data count = paperService.count(timeRange, user_id);
         return ResultData.success(count);
     }

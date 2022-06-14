@@ -7,8 +7,6 @@ import com.database.paperms.entity.vo.Data;
 import com.database.paperms.entity.vo.PageHelper;
 import com.database.paperms.entity.vo.PaperVO;
 
-import java.util.List;
-
 public interface PaperService {
     int savePaper(PaperDTO paperDTO);
 

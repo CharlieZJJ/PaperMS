@@ -24,7 +24,7 @@
 
     <update id="removeComment" parameterType="com.database.paperms.entity.Comment">
         update comment
-        set comment_content="此评论已经被删除！"
+        set comment_content= '此评论已经被删除！'
         where comment_id = #{commentId}
     </update>
 
@@ -44,7 +44,7 @@
         select *
         from comment
         where paper_id = #{paperId}
-            limit #{offset}, #{pageSize};
+        limit #{offset}, #{pageSize};
     </select>
 
     <select id="count" resultType="java.lang.Integer">

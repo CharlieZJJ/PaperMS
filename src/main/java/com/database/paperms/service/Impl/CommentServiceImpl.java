@@ -1,7 +1,6 @@
 package com.database.paperms.service.Impl;
 
 import com.database.paperms.entity.Comment;
-import com.database.paperms.entity.Reply;
 import com.database.paperms.entity.vo.PageHelper;
 import com.database.paperms.mapper.CommentMapper;
 import com.database.paperms.service.CommentService;
@@ -31,10 +30,12 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public int removeComment(Integer commentId){return commentMapper.removeComment(commentId);}
+    public int removeComment(Integer commentId) {
+        return commentMapper.removeComment(commentId);
+    }
 
     @Override
-    public int updateComment(Comment comment){
+    public int updateComment(Comment comment) {
         Date commentTime = new Date();
         comment.setCommentDate(commentTime);
         return commentMapper.updateComment(comment);
@@ -51,8 +52,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public PageHelper<Comment> listComment (Integer paperId, int pageSize, int pageNo){
-        List<Comment> list = commentMapper.listComment(paperId,(pageNo - 1) * pageSize, pageSize);
+    public PageHelper<Comment> listComment(Integer paperId, int pageSize, int pageNo) {
+        List<Comment> list = commentMapper.listComment(paperId, (pageNo - 1) * pageSize, pageSize);
         PageHelper<Comment> userPageHelper = new PageHelper<>(list);
         userPageHelper.setTotal(commentMapper.count());
         userPageHelper.setPageSize(pageSize);

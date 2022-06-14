@@ -22,6 +22,14 @@ public enum PaperType implements IEnum {
 
     DATA_SET(4, "数据集型");
 
+    private static final Map<Integer, PaperType> map = new HashMap<>();
+
+    static {
+        for (PaperType value : PaperType.values()) {
+            map.put(value.getCode(), value);
+        }
+    }
+
     private final Integer code;
     private final String value;
 
@@ -30,13 +38,7 @@ public enum PaperType implements IEnum {
         this.value = value;
     }
 
-    private static Map<Integer,PaperType> map = new HashMap<>();
-    static {
-        for (PaperType value : PaperType .values()) {
-            map.put(value.getCode(),value);
-        }
-    }
-    public static PaperType getByCode(Integer code){
+    public static PaperType getByCode(Integer code) {
         return map.get(code);
     }
 

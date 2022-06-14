@@ -6,12 +6,10 @@ import com.database.paperms.entity.ResearchDirection;
 import com.database.paperms.entity.SmallPaper;
 import com.database.paperms.entity.vo.AdvancedSearchValue;
 import com.database.paperms.entity.vo.rdCount;
-import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface PaperMapper {

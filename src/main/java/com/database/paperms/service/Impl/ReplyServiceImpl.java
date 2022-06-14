@@ -1,7 +1,6 @@
 package com.database.paperms.service.Impl;
 
 import com.database.paperms.entity.Reply;
-import com.database.paperms.entity.UserNote;
 import com.database.paperms.entity.vo.PageHelper;
 import com.database.paperms.mapper.ReplyMapper;
 import com.database.paperms.service.ReplyService;
@@ -30,7 +29,9 @@ public class ReplyServiceImpl implements ReplyService {
     }
 
     @Override
-    public int updateReply(Reply reply){return replyMapper.updateReply(reply);}
+    public int updateReply(Reply reply) {
+        return replyMapper.updateReply(reply);
+    }
 
     @Override
     public Reply getReply(Integer replyId) {
@@ -43,8 +44,8 @@ public class ReplyServiceImpl implements ReplyService {
     }
 
     @Override
-    public PageHelper<Reply> listReply (Integer commentId, int pageSize, int pageNo){
-        List<Reply> list = replyMapper.listReply(commentId,(pageNo - 1) * pageSize, pageSize);
+    public PageHelper<Reply> listReply(Integer commentId, int pageSize, int pageNo) {
+        List<Reply> list = replyMapper.listReply(commentId, (pageNo - 1) * pageSize, pageSize);
         PageHelper<Reply> userPageHelper = new PageHelper<>(list);
         userPageHelper.setTotal(replyMapper.count());
         userPageHelper.setPageSize(pageSize);

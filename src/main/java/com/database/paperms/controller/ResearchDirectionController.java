@@ -48,17 +48,17 @@ public class ResearchDirectionController {
         try {
             list = rdService.list();
         } catch (NullPointerException e) {
-            return ResultData.fail(-1, "研究方向数据出现问题，请维护");
+            return ResultData.fail(ReturnCode.RESEARCH_DIRECTION_ERROR);
         }
         if (list == null)
-            return ResultData.fail(-1, "获取数据失败");
+            return ResultData.fail(ReturnCode.GET_DATA_ERROR);
         return ResultData.success(list);
     }
 
     @PostMapping("/find")
     public ResultData find(@RequestBody List<String> name, @RequestParam int pageSize, @RequestParam int pageNo) {
         int size = name.size();
-        if(size == 0)
+        if (size == 0)
             return ResultData.fail(ReturnCode.RESEARCH_DIRECTION_IS_EMPTY);
         PageHelper<PaperVO> byRd = paperService.getByRd(pageSize, pageNo, name.get(name.size() - 1));
         return ResultData.success(byRd);

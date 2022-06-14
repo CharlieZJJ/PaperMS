@@ -1,7 +1,5 @@
 package com.database.paperms.controller;
 
-import com.database.paperms.entity.Reply;
-import com.database.paperms.entity.User;
 import com.database.paperms.entity.UserNote;
 import com.database.paperms.entity.vo.PageHelper;
 import com.database.paperms.response.ResultData;
@@ -20,7 +18,7 @@ public class UserNoteController {
 
     @PostMapping("/add")
     public ResultData add(@RequestBody UserNote userNote) {
-        if (userNoteService.getUserNote(userNote.getNoteUserId(),userNote.getNotePaperId()) == null) {
+        if (userNoteService.getUserNote(userNote.getNoteUserId(), userNote.getNotePaperId()) == null) {
             userNoteService.insertUserNote(userNote);
             return ResultData.success();
         } else {
@@ -29,9 +27,9 @@ public class UserNoteController {
     }
 
     @DeleteMapping("/delete")
-    public ResultData delete(@RequestParam Integer noteUserId,@RequestParam Integer notePaperId) {
-        if (userNoteService.getUserNote(noteUserId,notePaperId) != null) {
-            userNoteService.deleteUserNote(noteUserId,notePaperId);
+    public ResultData delete(@RequestParam Integer noteUserId, @RequestParam Integer notePaperId) {
+        if (userNoteService.getUserNote(noteUserId, notePaperId) != null) {
+            userNoteService.deleteUserNote(noteUserId, notePaperId);
             return ResultData.success();
         } else {
             return ResultData.fail(ReturnCode.NOT_EXISTENT_USER_NOTE);
@@ -40,7 +38,7 @@ public class UserNoteController {
 
     @PostMapping("/update")
     public ResultData update(@RequestBody UserNote userNote) {
-        if (userNoteService.getUserNote(userNote.getNoteUserId(),userNote.getNotePaperId()) != null) {
+        if (userNoteService.getUserNote(userNote.getNoteUserId(), userNote.getNotePaperId()) != null) {
             userNoteService.updateUserNote(userNote);
             return ResultData.success();
         } else {
@@ -49,8 +47,8 @@ public class UserNoteController {
     }
 
     @PutMapping("/list")
-    public ResultData list(@RequestParam Integer noteUserId,@RequestParam int pageSize, @RequestParam int pageNo) {
-        PageHelper<UserNote> list = userNoteService.listUserNote(noteUserId,pageSize, pageNo);
+    public ResultData list(@RequestParam Integer noteUserId, @RequestParam int pageSize, @RequestParam int pageNo) {
+        PageHelper<UserNote> list = userNoteService.listUserNote(noteUserId, pageSize, pageNo);
         return ResultData.success(list);
     }
 

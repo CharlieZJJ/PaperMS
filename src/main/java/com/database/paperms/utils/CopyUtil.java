@@ -3,7 +3,6 @@ package com.database.paperms.utils;
 import cn.hutool.core.date.DateException;
 import cn.hutool.core.date.DateUtil;
 import com.database.paperms.entity.Paper;
-import com.database.paperms.entity.ResearchDirection;
 import com.database.paperms.entity.SmallPaper;
 import com.database.paperms.entity.dto.PaperDTO;
 import com.database.paperms.entity.type.Impl.PaperType;
@@ -61,7 +60,7 @@ public class CopyUtil {
         paper.setPaperTitle(paperDTO.getPaperTitle());
         paper.setPaperMeeting(paperDTO.getPaperMeeting());
         try {
-            paper.setPaperDate(DateUtil.parse(paperDTO.getPaperDate(),"yyyy-MM-dd"));
+            paper.setPaperDate(DateUtil.parse(paperDTO.getPaperDate(), "yyyy-MM-dd"));
         } catch (DateException e) {
             throw new DateException(e);
         }

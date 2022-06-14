@@ -71,7 +71,9 @@ public class PaperServicelmpl implements PaperService {
     }
 
     @Override
-    public Integer getCitationIdByLink(String citationLink){return paperMapper.getCitationIdByLink(citationLink);}
+    public Integer getCitationIdByLink(String citationLink) {
+        return paperMapper.getCitationIdByLink(citationLink);
+    }
 
     @Override
     public int deletePaper(Integer paperId) {
@@ -143,6 +145,6 @@ public class PaperServicelmpl implements PaperService {
         List<rdCount> rdCounts = paperMapper.countRd(userId);
         int i = paperMapper.countByUserId(userId);
         int withRange = paperMapper.countByUserIdWithRange(DateUtil.offsetDay(new Date(), -timeRange), userId);
-        return new Data(i, rdCounts,withRange, timeRange);
+        return new Data(i, rdCounts, withRange, timeRange);
     }
 }
