@@ -1,58 +1,63 @@
 package com.database.paperms.service.Impl;
 
-import cn.hutool.core.date.DateField;
-import cn.hutool.core.date.DateUnit;
+import cn.hutool.core.date.DateException;
 import cn.hutool.core.date.DateUtil;
 import com.database.paperms.entity.FileEntity;
 import com.database.paperms.entity.Paper;
+import com.database.paperms.entity.UserNote;
+import com.database.paperms.entity.dto.PaperDTO;
 import com.database.paperms.entity.vo.*;
 import com.database.paperms.mapper.PaperMapper;
+import com.database.paperms.mapper.UserNoteMapper;
 import com.database.paperms.service.PaperService;
 import com.database.paperms.utils.CopyUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class PaperServicelmpl implements PaperService {
-    @Autowired
+    @Resource
     private PaperMapper paperMapper;
 
-    @Autowired
+    @Resource
     private CopyUtil copyUtil;
 
+    @Resource
+    private UserNoteMapper userNoteMapper;
+
+    @Transactional
     @Override
-    public int savePaper(Paper paper) {
-        Date publishTime = new Date();
-        paper.setPaperPublishTime(publishTime);
-        paperMapper.insertPaper(paper);
+    public int savePaper(PaperDTO paperDTO) {
+        Paper paper = null;
+        try {
+            paper = copyUtil.fromDTO(paperDTO);
+        } catch (DateException e) {
+            return -1;
+        }
+        int i = paperMapper.insertPaper(paper);
         Integer paperId = paper.getPaperId();
         List<String> rdlist = paper.getPaperRd();
         List<String> authorlist = paper.getPaperAuthor();
         List<Integer> citationlist = paper.getPaperCitation();
         List<FileEntity> fileList = paper.getPaperAdditionalFile();
-        for (int i = 0; i < rdlist.size(); i++) {
-            String rdId = rdlist.get(i);
-            paperMapper.insertPaperRd(paperId, rdId);
-        }
-        for (int i = 0; i < authorlist.size(); i++) {
-            String authorName = authorlist.get(i);
-            paperMapper.insertPaperAuthor(paperId, authorName);
-        }
-        for (int i = 0; i < citationlist.size(); i++) {
-            Integer citationId = citationlist.get(i);
-            paperMapper.insertPaperCitation(paperId, citationId);
-        }
-        for (int i = 0; i < fileList.size(); i++) {
-            FileEntity file = fileList.get(i);
+        rdlist.forEach(s -> paperMapper.insertPaperRd(paperId, s));
+        authorlist.forEach(s -> paperMapper.insertPaperAuthor(paperId, s));
+        citationlist.forEach(id -> paperMapper.insertPaperCitation(paperId, id));
+        for (FileEntity file : fileList) {
             String filePath = file.getPath();
             String fileName = file.getFileName();
             Double fileSize = file.getFileSize();
             paperMapper.insertPaperAdditionalFile(paperId, filePath, fileName, fileSize);
         }
-        return 1;
+        UserNote userNote = new UserNote(paperDTO.getPaperPublisherId(), paper.getPaperId(), paperDTO.getPaperNote(), new Date());
+        userNoteMapper.insertUserNote(userNote);
+        return 0;
     }
 
     @Override

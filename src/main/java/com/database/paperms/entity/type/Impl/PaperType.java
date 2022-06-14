@@ -2,6 +2,9 @@ package com.database.paperms.entity.type.Impl;
 
 import com.database.paperms.entity.type.IEnum;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * ClassName: com.database.paperms.entity.type.Paper
  * Created by zjj
@@ -25,6 +28,16 @@ public enum PaperType implements IEnum {
     PaperType(int code, String value) {
         this.code = code;
         this.value = value;
+    }
+
+    private static Map<Integer,PaperType> map = new HashMap<>();
+    static {
+        for (PaperType value : PaperType .values()) {
+            map.put(value.getCode(),value);
+        }
+    }
+    public static PaperType getByCode(Integer code){
+        return map.get(code);
     }
 
 

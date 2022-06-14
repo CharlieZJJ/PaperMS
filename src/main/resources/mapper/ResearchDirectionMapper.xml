@@ -27,4 +27,7 @@
         from research_direction
         order by rd_id
     </select>
+    <select id="getById" resultType="java.lang.String">
+        select rd_name from research_direction where rd_id = #{id}
+    </select>
 </mapper>

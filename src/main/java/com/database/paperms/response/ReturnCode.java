@@ -62,7 +62,9 @@ public enum ReturnCode {
     NOT_EXISTENT_REPLY(1011, "此回复不存在！"),
     NOT_EXISTENT_USER_NOTE(1012,"笔记不存在！"),
     USED_USER_NOTE(1013,"笔记已经存在。"),
-    RESEARCH_DIRECTION_IS_EMPTY(1014,"研究方向为空");
+    RESEARCH_DIRECTION_IS_EMPTY(1014,"研究方向为空"),
+    TIME_FORMAT_ERROR(1015,"时间格式错误，yyyy-MM-dd"),
+    PAPER_TYPE_RANGE_ERROR(1016,"论文类型错误");
     /**
      * 自定义状态码
      **/

@@ -2,6 +2,8 @@ package com.database.paperms.controller;
 
 import com.database.paperms.entity.Comment;
 import com.database.paperms.entity.Paper;
+import com.database.paperms.entity.dto.PaperDTO;
+import com.database.paperms.entity.type.Impl.PaperType;
 import com.database.paperms.entity.vo.AdvancedSearchValue;
 import com.database.paperms.entity.vo.CitationLinkVO;
 import com.database.paperms.entity.vo.PageHelper;
@@ -12,6 +14,7 @@ import com.database.paperms.service.CommentService;
 import com.database.paperms.service.PaperService;
 import com.database.paperms.service.UserService;
 import com.database.paperms.utils.CopyUtil;
+import net.dreamlu.mica.xss.core.XssCleanIgnore;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -42,22 +45,26 @@ public class PaperController {
 
 
     @PostMapping("/add")
-    public ResultData add(@RequestBody Paper paper,@RequestParam String userAccount) {
-        if (paperService.getByLink(paper.getPaperLink()) == null) {
-            Integer publisherId = userService.getIdByAccount(userAccount);
-            paper.setPaperPublisherId(publisherId);
-            paperService.savePaper(paper);
+    public ResultData add(@RequestBody PaperDTO paperDTO) {
+        if (paperDTO.getPaperType() < 0 || paperDTO.getPaperType() > 4)
+            return ResultData.fail(ReturnCode.PAPER_TYPE_RANGE_ERROR);
+        if (paperService.getByLink(paperDTO.getPaperLink()) == null) {
+            Integer user_id = (Integer) session.getAttribute("user_id");
+            paperDTO.setPaperPublisherId(1);
+            int i = paperService.savePaper(paperDTO);
+            if (i < 0) return ResultData.fail(ReturnCode.TIME_FORMAT_ERROR);
             return ResultData.success();
         } else {
             return ResultData.fail(ReturnCode.USED_PAPER_LINK);
         }
+
     }
 
     @PostMapping("/add/getId")
-    public ResultData getCitationIdByLink(@RequestBody List<CitationLinkVO> citationLink){
-        List<Integer> idList=new ArrayList<>();
-        for(int i=0;i<citationLink.size();i++){
-            if(paperService.getCitationIdByLink(citationLink.get(i).getValue()) != null) {
+    public ResultData getCitationIdByLink(@RequestBody List<CitationLinkVO> citationLink) {
+        List<Integer> idList = new ArrayList<>();
+        for (int i = 0; i < citationLink.size(); i++) {
+            if (paperService.getCitationIdByLink(citationLink.get(i).getValue()) != null) {
                 Integer id = paperService.getCitationIdByLink(citationLink.get(i).getValue());
                 idList.add(id);
             }

@@ -1,6 +1,7 @@
 package com.database.paperms.service;
 
 import com.database.paperms.entity.Paper;
+import com.database.paperms.entity.dto.PaperDTO;
 import com.database.paperms.entity.vo.AdvancedSearchValue;
 import com.database.paperms.entity.vo.Data;
 import com.database.paperms.entity.vo.PageHelper;
@@ -9,7 +10,7 @@ import com.database.paperms.entity.vo.PaperVO;
 import java.util.List;
 
 public interface PaperService {
-    int savePaper(Paper paper);
+    int savePaper(PaperDTO paperDTO);
 
     Paper getPaper(Integer paperId);
 

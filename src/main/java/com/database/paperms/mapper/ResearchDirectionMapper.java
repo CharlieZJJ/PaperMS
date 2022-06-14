@@ -16,5 +16,7 @@ public interface ResearchDirectionMapper {
 
     List<ResearchDirection> list();
 
+    String getById(String id);
+
 
 }
