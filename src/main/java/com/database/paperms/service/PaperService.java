@@ -18,7 +18,7 @@ public interface PaperService {
 
     int deletePaper(Integer paperId);
 
-    int updatePaper(Paper paper);
+    int updatePaper(PaperDTO paperDTO);
 
     PageHelper<PaperVO> list(String type, String cond, int sort, int pageSize, int pageNo);
 

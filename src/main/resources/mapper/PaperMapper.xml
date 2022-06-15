@@ -79,6 +79,22 @@
         from paper_additional_file
         where paper_id = #{paperId}
     </delete>
+    <delete id="deleteFileByCond">
+        delete from paper_additional_file
+        where paper_id = #{paperId} and file_path = #{filePath} and file_name = #{fileName}
+    </delete>
+    <delete id="deletePaperAuthorExact">
+        delete from paper_author
+        where paper_id = #{paperId} and author_name = #{authorName}
+    </delete>
+    <delete id="deletePaperCitationExact">
+        delete from paper_citation
+        where paper_id = #{paperId} and citation_id = #{citation}
+    </delete>
+    <delete id="deletePaperRdExact">
+        delete from paper_rd
+        where paper_id = #{paperId} and rd_id = #{rdId}
+    </delete>
 
     <update id="updatePaper" parameterType="com.database.paperms.entity.Paper">
         update paper
@@ -88,8 +104,7 @@
             paper_summary=#{paperSummary},
             paper_link=#{paperLink},
             paper_type=#{paperType},
-            paper_publisher_id=#{paperPublisherId},
-            paper_publish_time=#{paperPublishTime}
+            paper_publisher_id=#{paperPublisherId}
         where paper_id = #{paperId}
     </update>
 
@@ -322,6 +337,12 @@
                  inner join research_direction rd on pr.rd_id = rd.rd_id
         where paper_publisher_id = #{userId}
         group by rd_name
+    </select>
+    <select id="getIdByLink" resultType="java.lang.Integer">
+        select paper_id from paper where paper_link = #{paperLink}
+    </select>
+    <select id="getFileByPaperId" resultType="com.database.paperms.entity.FileEntity">
+        select file_path, file_name, file_size from paper_additional_file where paper_id = #{paperId}
     </select>
 
 </mapper>

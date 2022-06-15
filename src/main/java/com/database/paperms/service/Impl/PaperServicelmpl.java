@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateException;
 import cn.hutool.core.date.DateUtil;
 import com.database.paperms.entity.FileEntity;
 import com.database.paperms.entity.Paper;
+import com.database.paperms.entity.ResearchDirection;
 import com.database.paperms.entity.UserNote;
 import com.database.paperms.entity.dto.PaperDTO;
 import com.database.paperms.entity.vo.*;
@@ -85,8 +86,72 @@ public class PaperServicelmpl implements PaperService {
     }
 
     @Override
-    public int updatePaper(Paper paper) {
-        return paperMapper.updatePaper(paper);
+    public int updatePaper(PaperDTO paperDTO) {
+        Integer id = paperMapper.getIdByLink(paperDTO.getPaperLink());
+        if(id == null)
+            return -1;
+        Paper paper = copyUtil.fromDTO(paperDTO);
+        paper.setPaperId(id);
+        paperMapper.updatePaper(paper);
+        List<FileEntity> origin = paperMapper.getPaperAdditionalFile(id);
+        List<FileEntity> now = paper.getPaperAdditionalFile();
+        //更新文件
+        //在进行完这个循环之后，origin列表之中将剩余等待删除的文件，而now列表之中则会留下等待添加的文件
+        for (int i = origin.size() - 1; i >= 0; i--){
+            FileEntity o = origin.get(i);
+            if (now.contains(o)) {
+                now.remove(o);
+                origin.remove(o);
+            }
+        }
+        for (FileEntity fileEntity : origin) {
+            String fileName = fileEntity.getFileName();
+            String path = fileEntity.getPath();
+            paperMapper.deleteFileByCond(id,path,fileName);
+        }
+        for (FileEntity fileEntity : now) {
+            String fileName = fileEntity.getFileName();
+            Double fileSize = fileEntity.getFileSize();
+            String path = fileEntity.getPath();
+            paperMapper.insertPaperAdditionalFile(id,path,fileName,fileSize);
+        }
+        //更新作者
+        List<String> oldAuthor = paperMapper.getPaperAuthor(id);
+        List<String> newAuthor = paper.getPaperAuthor();
+        for (int i = oldAuthor.size() - 1; i >= 0; i--){
+            String o = oldAuthor.get(i);
+            if (newAuthor.contains(o)) {
+                newAuthor.remove(o);
+                oldAuthor.remove(o);
+            }
+        }
+        oldAuthor.forEach(s -> paperMapper.deletePaperAuthorExact(id,s));
+        oldAuthor.forEach(s -> paperMapper.insertPaperAuthor(id,s));
+        //更新引用
+        List<Integer> oldCitation = paperMapper.getPaperCitation(id);
+        List<Integer> newCitation = paper.getPaperCitation();
+        for (int i = oldCitation.size() - 1; i >= 0; i--){
+            Integer o = oldCitation.get(i);
+            if (newCitation.contains(o)) {
+                newCitation.remove(o);
+                oldCitation.remove(o);
+            }
+        }
+        oldCitation.forEach(i -> paperMapper.deletePaperCitationExact(id,i));
+        newCitation.forEach(i -> paperMapper.insertPaperCitation(id,i));
+        //更新研究方向
+        List<ResearchDirection> oldRd = paperMapper.getPaperRd(id);
+        List<String> newRd = paper.getPaperRd();
+        for (int i = oldRd.size() - 1; i >= 0; i--){
+            ResearchDirection rd = oldRd.get(i);
+            if (newRd.contains(rd.getRdId())) {
+                newRd.remove(rd.getRdId());
+                oldRd.remove(rd);
+            }
+        }
+        oldRd.forEach(rd -> paperMapper.deletePaperRdExact(id, rd.getRdId()));
+        newRd.forEach(s -> paperMapper.insertPaperRd(id,s));
+        return 0;
     }
 
     @Override

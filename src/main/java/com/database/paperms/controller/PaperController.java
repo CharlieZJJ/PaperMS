@@ -1,7 +1,6 @@
 package com.database.paperms.controller;
 
 import com.database.paperms.entity.Comment;
-import com.database.paperms.entity.Paper;
 import com.database.paperms.entity.dto.PaperDTO;
 import com.database.paperms.entity.vo.AdvancedSearchValue;
 import com.database.paperms.entity.vo.CitationLinkVO;
@@ -78,13 +77,11 @@ public class PaperController {
     }
 
     @PostMapping("/update")
-    public ResultData update(@RequestBody Paper paper) {
-        if (paperService.getPaper(paper.getPaperId()) != null) {
-            paperService.updatePaper(paper);
-            return ResultData.success();
-        } else {
+    public ResultData update(@RequestBody PaperDTO paperDTO) {
+        int i = paperService.updatePaper(paperDTO);
+        if(i == -1)
             return ResultData.fail(ReturnCode.NOT_EXISTENT_PAPER_ID);
-        }
+        else return ResultData.success();
     }
 
     @GetMapping("/list")

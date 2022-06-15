@@ -30,13 +30,21 @@ public interface PaperMapper {
 
     Paper getByLink(String paperLink);
 
+    Integer getIdByLink(String paperLink);
+
     int deletePaper(Integer paperId);
 
     int deletePaperRd(Integer paperId);
 
+    int deletePaperRdExact(Integer paperId, String rdId);
+
     int deletePaperAuthor(Integer paperId);
 
+    int deletePaperAuthorExact(Integer paperId, String authorName);
+
     int deletePaperCitation(Integer paperId);
+
+    int deletePaperCitationExact(Integer paperId, Integer citation);
 
     int deletePaperAdditionalFile(Integer paperId);
 
@@ -65,5 +73,7 @@ public interface PaperMapper {
     int countByUserIdWithRange(Date lowerBound, Integer userId);
 
     List<rdCount> countRd(Integer userId);
+
+    int deleteFileByCond(Integer paperId, String filePath, String fileName);
 
 }
