@@ -40,7 +40,7 @@ public class PaperController {
             return ResultData.fail(ReturnCode.PAPER_TYPE_RANGE_ERROR);
         if (paperService.getByLink(paperDTO.getPaperLink()) == null) {
             Integer user_id = (Integer) session.getAttribute("user_id");
-            paperDTO.setPaperPublisherId(1);
+            paperDTO.setPaperPublisherId(user_id);
             int i = paperService.savePaper(paperDTO);
             if (i < 0) return ResultData.fail(ReturnCode.TIME_FORMAT_ERROR);
             return ResultData.success();
