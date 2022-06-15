@@ -2,10 +2,9 @@ package com.database.paperms.service;
 
 import com.database.paperms.entity.Paper;
 import com.database.paperms.entity.dto.PaperDTO;
-import com.database.paperms.entity.vo.AdvancedSearchValue;
-import com.database.paperms.entity.vo.Data;
-import com.database.paperms.entity.vo.PageHelper;
-import com.database.paperms.entity.vo.PaperVO;
+import com.database.paperms.entity.vo.*;
+
+import java.util.List;
 
 public interface PaperService {
     int savePaper(PaperDTO paperDTO);
@@ -15,6 +14,8 @@ public interface PaperService {
     Paper getByLink(String paperLink);
 
     Integer getCitationIdByLink(String citationLink);
+
+    List<PaperCitationStrVO> getCitation(Integer paperId);
 
     int deletePaper(Integer paperId);
 

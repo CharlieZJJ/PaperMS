@@ -2,10 +2,7 @@ package com.database.paperms.controller;
 
 import com.database.paperms.entity.Comment;
 import com.database.paperms.entity.dto.PaperDTO;
-import com.database.paperms.entity.vo.AdvancedSearchValue;
-import com.database.paperms.entity.vo.CitationLinkVO;
-import com.database.paperms.entity.vo.PageHelper;
-import com.database.paperms.entity.vo.PaperVO;
+import com.database.paperms.entity.vo.*;
 import com.database.paperms.response.ResultData;
 import com.database.paperms.response.ReturnCode;
 import com.database.paperms.service.CommentService;
@@ -59,6 +56,12 @@ public class PaperController {
             }
         }
         return ResultData.success(idList);
+    }
+
+    @PostMapping("/getCitation/{id}")
+    public ResultData getCitation(@PathVariable("id") Integer paperId) {
+        List<PaperCitationStrVO> listCitation = paperService.getCitation(paperId);
+        return ResultData.success(listCitation);
     }
 
     @DeleteMapping("/delete/{id}")

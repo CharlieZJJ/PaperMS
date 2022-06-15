@@ -44,6 +44,12 @@
         where paper_link = #{citationLink}
     </select>
 
+    <select id="getCitationIdByPaperId" resultType="java.lang.Integer">
+        select paper_id
+        from paper
+        where paper_link = #{citationLink}
+    </select>
+
     <select id="getByLink" resultType="com.database.paperms.entity.Paper">
         select *
         from paper

@@ -67,6 +67,22 @@ public class PaperServicelmpl implements PaperService {
     }
 
     @Override
+    public List<PaperCitationStrVO> getCitation(Integer paperId){
+        List<PaperCitationStrVO> listPaperCitationStr = new ArrayList<>();
+        List<Integer> idList = paperMapper.getPaperCitation(paperId);
+        for(int i=0;i<idList.size();i++){
+            PaperCitationStrVO entry = new PaperCitationStrVO();
+            Integer id = idList.get(i);
+            Paper paper = paperMapper.getPaper(id);
+            entry.setId(i+1);
+            entry.setValue(paper.getPaperLink());
+            entry.setName(paper.getPaperTitle());
+            listPaperCitationStr.add(entry);
+        }
+        return listPaperCitationStr;
+    }
+
+    @Override
     public Paper getByLink(String paperLink) {
         return paperMapper.getByLink(paperLink);
     }
