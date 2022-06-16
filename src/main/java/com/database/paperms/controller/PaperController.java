@@ -64,6 +64,12 @@ public class PaperController {
         return ResultData.success(listCitation);
     }
 
+    @PostMapping("/show/{id}")
+    public ResultData show(@PathVariable("id") Integer paperId) {
+        PaperVO paperVO = paperService.showPaper(paperId);
+        return ResultData.success(paperVO);
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResultData delete(@PathVariable("id") Integer paperId) {
         if (paperService.getPaper(paperId) != null) {

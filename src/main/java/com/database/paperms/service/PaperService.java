@@ -11,6 +11,8 @@ public interface PaperService {
 
     Paper getPaper(Integer paperId);
 
+    public PaperVO showPaper(Integer paperId);
+
     Paper getByLink(String paperLink);
 
     Integer getCitationIdByLink(String citationLink);

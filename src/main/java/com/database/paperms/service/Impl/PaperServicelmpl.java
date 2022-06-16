@@ -2,16 +2,15 @@ package com.database.paperms.service.Impl;
 
 import cn.hutool.core.date.DateException;
 import cn.hutool.core.date.DateUtil;
-import com.database.paperms.entity.FileEntity;
-import com.database.paperms.entity.Paper;
-import com.database.paperms.entity.ResearchDirection;
-import com.database.paperms.entity.UserNote;
+import com.database.paperms.entity.*;
 import com.database.paperms.entity.dto.PaperDTO;
 import com.database.paperms.entity.vo.*;
 import com.database.paperms.mapper.PaperMapper;
+import com.database.paperms.mapper.UserMapper;
 import com.database.paperms.mapper.UserNoteMapper;
 import com.database.paperms.service.PaperService;
 import com.database.paperms.utils.CopyUtil;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +24,9 @@ import java.util.List;
 public class PaperServicelmpl implements PaperService {
     @Resource
     private PaperMapper paperMapper;
+
+    @Resource
+    private UserMapper userMapper;
 
     @Resource
     private CopyUtil copyUtil;
@@ -64,6 +66,30 @@ public class PaperServicelmpl implements PaperService {
     @Override
     public Paper getPaper(Integer paperId) {
         return paperMapper.getPaper(paperId);
+    }
+
+    @Override
+    public PaperVO showPaper(Integer paperId){
+        PaperVO paperVO = new PaperVO();
+        Paper paper = paperMapper.getPaper(paperId);
+        paperVO.setPaperAdditionalFile(paper.getPaperAdditionalFile());
+        paperVO.setPaperAuthor(paper.getPaperAuthor());
+        List<Integer> paperCitationList = paperMapper.getPaperCitation(paper.getPaperId());
+        List<SmallPaper> smallPaperList = paperMapper.getSmallPaper(paperCitationList);
+        paperVO.setPaperCitation(smallPaperList);
+        paperVO.setPaperDate(paper.getPaperDate());
+        paperVO.setPaperId(paperId);
+        paperVO.setPaperLink(paper.getPaperLink());
+        paperVO.setPaperMeeting(paper.getPaperMeeting());
+        paperVO.setPaperPublishTime(paper.getPaperPublishTime());
+        UserVO userVO = userMapper.getUserById(paper.getPaperPublisherId());
+        paperVO.setPaperPublisher(userVO);
+        List<ResearchDirection> researchDirections = paperMapper.getPaperRd(paper.getPaperId());
+        paperVO.setPaperRd(researchDirections);
+        paperVO.setPaperSummary(paper.getPaperSummary());
+        paperVO.setPaperTitle(paper.getPaperTitle());
+        paperVO.setPaperType(paper.getPaperType().getValue());
+        return paperVO;
     }
 
     @Override
