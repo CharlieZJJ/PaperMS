@@ -8,6 +8,7 @@ import com.database.paperms.service.ReplyService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/reply")
@@ -16,8 +17,13 @@ public class ReplyController {
     @Resource
     private ReplyService replyService;
 
+    @Resource
+    private HttpSession session;
+
     @PostMapping("/add")
     public ResultData add(@RequestBody Reply reply) {
+        Integer replyId = (Integer) session.getAttribute("user_id");
+        reply.setReplyUserId(replyId);
         replyService.saveReply(reply);
         return ResultData.success();
     }
