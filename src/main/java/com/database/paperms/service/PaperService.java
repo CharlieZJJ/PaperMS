@@ -13,6 +13,8 @@ public interface PaperService {
 
     public PaperVO showPaper(Integer paperId);
 
+    public String showNote(Integer userId,Integer paperId);
+
     Paper getByLink(String paperLink);
 
     Integer getCitationIdByLink(String citationLink);

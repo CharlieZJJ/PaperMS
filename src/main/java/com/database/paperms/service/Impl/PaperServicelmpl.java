@@ -93,6 +93,12 @@ public class PaperServicelmpl implements PaperService {
     }
 
     @Override
+    public String showNote(Integer userId,Integer paperId){
+        UserNote userNote = userNoteMapper.getUserNote(userId,paperId);
+        return userNote.getNoteContent();
+    }
+
+    @Override
     public List<PaperCitationStrVO> getCitation(Integer paperId){
         List<PaperCitationStrVO> listPaperCitationStr = new ArrayList<>();
         List<Integer> idList = paperMapper.getPaperCitation(paperId);

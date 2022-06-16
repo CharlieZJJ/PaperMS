@@ -64,10 +64,17 @@ public class PaperController {
         return ResultData.success(listCitation);
     }
 
-    @PostMapping("/show/{id}")
+    @PostMapping("/showpaper/{id}")
     public ResultData show(@PathVariable("id") Integer paperId) {
         PaperVO paperVO = paperService.showPaper(paperId);
         return ResultData.success(paperVO);
+    }
+
+    @PostMapping("/shownote")
+    public ResultData shownote(@RequestParam Integer paperId) {
+        Integer userId = (Integer) session.getAttribute("user_id");
+        String noteContent = paperService.showNote(userId,paperId);
+        return ResultData.success(noteContent);
     }
 
     @DeleteMapping("/delete/{id}")
