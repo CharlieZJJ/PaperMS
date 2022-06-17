@@ -2,6 +2,7 @@ package com.database.paperms.controller;
 
 import com.database.paperms.entity.Comment;
 import com.database.paperms.entity.Reply;
+import com.database.paperms.entity.vo.CommentVO;
 import com.database.paperms.entity.vo.PageHelper;
 import com.database.paperms.response.ResultData;
 import com.database.paperms.response.ReturnCode;
@@ -55,6 +56,12 @@ public class CommentController {
         } else {
             return ResultData.fail(ReturnCode.NOT_EXISTENT_COMMENT);
         }
+    }
+
+    @PostMapping("/show/{id}")
+    public ResultData show(@PathVariable("id") Integer paperId) {
+        List<CommentVO> commentVOS = commentService.showComment(paperId);
+        return ResultData.success(commentVOS);
     }
 
     @PostMapping("/update")

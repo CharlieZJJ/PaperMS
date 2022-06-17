@@ -1,6 +1,7 @@
 package com.database.paperms.service;
 
 import com.database.paperms.entity.Comment;
+import com.database.paperms.entity.vo.CommentVO;
 import com.database.paperms.entity.vo.PageHelper;
 
 import java.util.List;
@@ -14,6 +15,8 @@ public interface CommentService {
     int removeComment(Integer commentId);
 
     int updateComment(Comment comment);
+
+    List<CommentVO> showComment(Integer commentId);
 
     Comment getComment(Integer commentId);
 
